@@ -1,0 +1,9 @@
+#! ruby
+require 'test/unit'
+require 'helpema'
+
+class TestHelpema < Test::Unit::TestCase
+  def test_version
+    assert_equal '0.0.0', Helpema::VERSION
+  end
+end

@@ -1,0 +1,13 @@
+#! ruby
+require 'test/unit'
+require 'helpema'
+
+class TestHelpema < Test::Unit::TestCase
+  def test_zbar
+    assert_nothing_raised() do
+      # Just check that it runs, needs "live" testing.
+      q = Helpema::ZBar.qrcode
+      assert_nil q
+    end
+  end
+end
