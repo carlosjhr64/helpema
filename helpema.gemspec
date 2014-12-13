@@ -26,20 +26,16 @@ SUMMARY
 
   s.require_paths = ["lib"]
   s.files = %w(
-History.txt
 README.rdoc
-TODO.txt
 lib/helpema.rb
 lib/helpema/ssss.rb
 lib/helpema/version.rb
 lib/helpema/zbar.rb
-test/tc_helpema
-test/tc_ssss
-test/tc_zbar
   )
 
   s.requirements << 'ruby: ruby 2.1.3p242 (2014-09-19 revision 47630) [x86_64-linux]'
-  s.requirements << 'system: linux/bash'
+  s.requirements << 'ssss-split: 0.5'
+  s.requirements << 'ssss-combine: 0.5'
   s.requirements << 'zbarcam: 0.10'
 
 end
