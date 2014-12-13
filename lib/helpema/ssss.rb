@@ -2,7 +2,6 @@ module Helpema
 module SSSS
 
   def self.split(pwd, t, n)
-    raise "Need t of n (n>t)." unless n>t
     pwds = nil
     Open3.popen3("ssss-split -Q -t #{t} -n #{n}") do |stdin, stdout, stderr|
       stdin.puts pwd
