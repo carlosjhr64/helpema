@@ -1,0 +1,7 @@
+^(
+ (\.)|
+ (test\/)|
+ (TODO\.)|
+ (helpema.gemspec)|
+ (History\.)
+)
