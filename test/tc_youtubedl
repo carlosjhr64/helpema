@@ -1,0 +1,14 @@
+#! ruby
+require 'test/unit'
+require 'helpema'
+
+class TestHelpema < Test::Unit::TestCase
+  def test_youtubedl
+    assert_nothing_raised() do
+      Helpema::YouTubeDL.json('caca') do |obj|
+        assert_equal String, obj.class
+        assert_match /^ERROR:/, obj
+      end
+    end
+  end
+end
