@@ -1,3 +1,9 @@
+something like:
+  options = ''
+  while ARGV[0]=~/^-/
+    options += ARGV.shift
+  end
+
 == File List
 
 

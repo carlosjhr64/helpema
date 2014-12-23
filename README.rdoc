@@ -16,6 +16,8 @@ More later.
 
 === Helpema::ZBar.qrcode( timeout=3 )
 
+=== Helpema::YouTubeDL.json( url ){|obj| ... }
+
 == INSTALL:
 
   $ sudo gem install helpema

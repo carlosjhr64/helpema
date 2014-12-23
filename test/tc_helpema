@@ -4,6 +4,6 @@ require 'helpema'
 
 class TestHelpema < Test::Unit::TestCase
   def test_version
-    assert_equal '0.0.1', Helpema::VERSION
+    assert_equal '0.1.0', Helpema::VERSION
   end
 end
