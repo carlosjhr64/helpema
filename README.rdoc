@@ -4,7 +4,12 @@
 
 == DESCRIPTION:
 
-Some wrappers on the following linux commands: ssss-split, ssss-combine, zbarcam.
+Some wrappers on the following linux commands:
+
+* ssss-split
+* ssss-combine
+* zbarcam
+* youtube-dl -j
 
 More later.
 
