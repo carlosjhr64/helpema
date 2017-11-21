@@ -33,9 +33,10 @@ lib/helpema/youtubedl.rb
 lib/helpema/zbar.rb
   )
 
-  s.requirements << 'ruby: ruby 2.3.3p222 (2016-11-21 revision 56859) [x86_64-linux]'
+  s.requirements << 'ruby: ruby 2.4.2p198 (2017-09-14 revision 59899) [x86_64-linux]'
   s.requirements << 'ssss-split: 0.5'
   s.requirements << 'ssss-combine: 0.5'
-  s.requirements << 'zbarcam: 0.10'
+  s.requirements << 'zbarcam: 0.20'
+  s.requirements << 'gnome-screenshot: gnome-screenshot 3.22.0'
 
 end
