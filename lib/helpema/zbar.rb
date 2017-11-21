@@ -1,7 +1,9 @@
+require 'timeout'
+
 module Helpema
 module ZBar
 
-  def self.qrcode(timeout=3)
+  def self.cam(timeout=3)
     qrcode = ''
     IO.popen('zbarcam --nodisplay --raw --prescale=800x800', 'r') do |io|
       begin

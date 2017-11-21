@@ -1,3 +1,6 @@
+require 'json'
+require 'open3'
+
 module Helpema
 module YouTubeDL
 

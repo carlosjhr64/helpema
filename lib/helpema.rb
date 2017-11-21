@@ -1,10 +1,8 @@
-# Standard Libraries
-require 'open3'
-require 'timeout'
-require 'json'
+module Helpema
+  VERSION = '1.0.0'
+end
 
 # This Gem
-require 'helpema/version.rb'
 require 'helpema/ssss.rb'
 require 'helpema/zbar.rb'
 require 'helpema/youtubedl.rb'

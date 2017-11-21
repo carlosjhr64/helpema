@@ -1,6 +1,6 @@
 #! ruby
 require 'test/unit'
-require 'helpema'
+require 'helpema/ssss'
 
 class TestHelpema < Test::Unit::TestCase
   def test_ssss

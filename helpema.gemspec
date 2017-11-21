@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
 
   s.name     = 'helpema'
-  s.version  = '0.2.0'
+  s.version  = '1.0.0'
 
   s.homepage = 'https://github.com/carlosjhr64/helpema'
 
   s.author   = 'carlosjhr64'
   s.email    = 'carlosjhr64@gmail.com'
 
-  s.date     = '2017-06-14'
+  s.date     = '2017-11-21'
   s.licenses = ['MIT']
 
   s.description = <<DESCRIPTION
@@ -29,7 +29,6 @@ SUMMARY
 README.rdoc
 lib/helpema.rb
 lib/helpema/ssss.rb
-lib/helpema/version.rb
 lib/helpema/youtubedl.rb
 lib/helpema/zbar.rb
   )
