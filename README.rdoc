@@ -14,7 +14,13 @@ More later.
 
 === Helpema::SSSS.combine( *shared_secrets )
 
-=== Helpema::ZBar.qrcode( timeout=3 )
+=== Helpema::ZBar.cam( timeout=3 )
+
+Reads qrcodes on camera.
+
+=== Helpema::ZBar.screen
+
+Reads qrcodes on screen.
 
 === Helpema::YouTubeDL.json( url ){|obj| ... }
 
@@ -26,7 +32,7 @@ More later.
 
 (The MIT License)
 
-Copyright (c) 2014 carlosjhr64
+Copyright (c) 2017 carlosjhr64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
