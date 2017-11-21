@@ -12,3 +12,4 @@ require 'helpema/youtubedl.rb'
 #`ssss-split`
 #`ssss-combine`
 #`zbarcam`
+#`gnome-screenshot`

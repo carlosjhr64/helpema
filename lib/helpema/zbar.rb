@@ -1,28 +1,42 @@
 require 'timeout'
+require 'tmpdir'
 
 module Helpema
 module ZBar
 
   def self.cam(timeout=3)
-    qrcode = ''
+    raw = ''
     IO.popen('zbarcam --nodisplay --raw --prescale=800x800', 'r') do |io|
       begin
         Timeout.timeout(timeout) do
-          qrcode << io.gets
+          raw << io.gets
           while q = io.gets
             break if q=="\n"
-            qrcode << q
+            raw << q
           end
-          qrcode.strip!
+          raw.strip!
         end
       rescue Timeout::Error
-        qrcode = nil
+        raw = nil
         $stderr.puts $!
       ensure
         Process.kill('INT', io.pid)
       end
     end
-    qrcode
+    raw
+  end
+
+  def self.screen
+    tmpdir = Dir.tmpdir()
+    screenshot = File.join(tmpdir, "#{$$}.#{Time.now.to_f}.png")
+    raw = nil
+    begin
+      system "gnome-screenshot -f #{screenshot}"
+      raw = `zbarimg -q --raw #{screenshot}`.strip
+    ensure
+      File.unlink screenshot if File.exist? screenshot
+    end
+    raw
   end
 
 end
