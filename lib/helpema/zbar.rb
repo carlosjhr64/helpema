@@ -27,14 +27,11 @@ module ZBar
   end
 
   def self.screen
-    tmpdir = Dir.tmpdir()
-    screenshot = File.join(tmpdir, "#{$$}.#{Time.now.to_f}.png")
     raw = nil
-    begin
+    Dir.mktmpdir do |tmpdir|
+      screenshot = File.join(tmpdir, "#{$$}.#{Time.now.to_f}.png")
       system "gnome-screenshot -f #{screenshot}"
       raw = `zbarimg -q --raw #{screenshot}`.strip
-    ensure
-      File.unlink screenshot if File.exist? screenshot
     end
     raw
   end

@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
 
   s.name     = 'helpema'
-  s.version  = '1.0.0'
+  s.version  = '1.0.1'
 
   s.homepage = 'https://github.com/carlosjhr64/helpema'
 
