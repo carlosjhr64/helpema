@@ -1,38 +1,34 @@
-= helpema
+# helpema
 
-{<img src="https://badge.fury.io/rb/helpema.svg" alt="Gem Version" />}[http://badge.fury.io/rb/helpema]
+* [VERSION 1.1.200123](https://github.com/carlosjhr64/helpema/releases)
+* [github](https://github/carlosjhr64/helpema)
+* [rubygems](https://rubygems/gems/helpema)
 
-== DESCRIPTION:
+## DESCRIPTION:
 
 Some wrappers on the following linux commands: ssss-split, ssss-combine, zbarcam, youtube-dl -j.
 
 More later.
 
-== SYNOPSIS:
+## SYNOPSIS:
 
-=== Helpema::SSSS.split( secret, threshold, shares)
+    require 'helpema'
+    include Helpema
+    SSSS.split( secret, threshold, shares)
+    SSSS.combine( *shared_secrets )
+    ZBar.cam( timeout=3 ) # Reads qrcodes on camera.
+    ZBar.screen # Reads qrcodes on screen.
+    YouTubeDL.json( url ){|obj| obj.inspect }
 
-=== Helpema::SSSS.combine( *shared_secrets )
+## INSTALL:
 
-=== Helpema::ZBar.cam( timeout=3 )
+    $ sudo gem install helpema
 
-Reads qrcodes on camera.
-
-=== Helpema::ZBar.screen
-
-Reads qrcodes on screen.
-
-=== Helpema::YouTubeDL.json( url ){|obj| ... }
-
-== INSTALL:
-
-  $ sudo gem install helpema
-
-== LICENSE:
+## LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2017 carlosjhr64
+Copyright (c) 2020 carlosjhr64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

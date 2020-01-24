@@ -1,7 +1,9 @@
 ^(
  (\.)|
+ (examples\/)|
  (test\/)|
+ (features\/)|
  (TODO\.)|
- (helpema.gemspec)|
+ (\w+\.gemspec)|
  (History\.)
 )
