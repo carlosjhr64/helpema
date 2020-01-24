@@ -1,12 +1,11 @@
-module Helpema
-  VERSION = '1.1.200123'
+module HELPEMA
+  VERSION = '2.0.200124'
+
+  autoload :Helpema,   'helpema/helpema.rb'
+  autoload :SSSS,      'helpema/ssss.rb'
+  autoload :YouTubeDL, 'helpema/youtubedl.rb'
+  autoload :ZBar,      'helpema/zbar.rb'
 end
-
-# This Gem
-require 'helpema/ssss.rb'
-require 'helpema/zbar.rb'
-require 'helpema/youtubedl.rb'
-
 # Requires:
 #`ruby`
 #`ssss-split`

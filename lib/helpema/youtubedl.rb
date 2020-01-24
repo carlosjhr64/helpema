@@ -1,9 +1,8 @@
 require 'json'
 require 'open3'
 
-module Helpema
+module HELPEMA
 module YouTubeDL
-
   def self.json(url, pwd=nil)
     Open3.popen2e("youtube-dl -j '#{url}'") do |i, o|
       i.puts pwd if pwd
@@ -17,6 +16,5 @@ module YouTubeDL
       end
     end
   end
-
 end
 end

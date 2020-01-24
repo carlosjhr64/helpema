@@ -1,12 +1,12 @@
 require 'helpema'
-include Helpema
+include HELPEMA
 
 # IRB Tools
 require 'irbtools/configure'
-_ = Helpema::VERSION.split('.')[0..1].join('.')
-Irbtools.welcome_message = "### Helpema(#{_}) ###"
+_ = HELPEMA::VERSION.split('.')[0..1].join('.')
+Irbtools.welcome_message = "### HELPEMA(#{_}) ###"
 require 'irbtools'
-IRB.conf[:PROMPT][:Helpema] = {
+IRB.conf[:PROMPT][:HELPEMA] = {
   PROMPT_I:    '> ',
   PROMPT_N:    '| ',
   PROMPT_C:    '| ',
@@ -14,4 +14,4 @@ IRB.conf[:PROMPT][:Helpema] = {
   RETURN:      "=> %s \n",
   AUTO_INDENT: true,
 }
-IRB.conf[:PROMPT_MODE] = :Helpema
+IRB.conf[:PROMPT_MODE] = :HELPEMA

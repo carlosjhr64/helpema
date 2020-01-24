@@ -1,28 +1,58 @@
 # helpema
 
-* [VERSION 1.1.200123](https://github.com/carlosjhr64/helpema/releases)
+* [VERSION 2.0.200124](https://github.com/carlosjhr64/helpema/releases)
 * [github](https://github/carlosjhr64/helpema)
 * [rubygems](https://rubygems/gems/helpema)
 
 ## DESCRIPTION:
 
-Some wrappers on the following linux commands: ssss-split, ssss-combine, zbarcam, youtube-dl -j.
+Meant to be an eclectic collection of useful single functions and wrappers.
+Wrappers: ssss-split, ssss-combine, zbarcam, youtube-dl -j.
+Funtions: requires("gemname version",...).
 
 More later.
 
 ## SYNOPSIS:
 
     require 'helpema'
-    include Helpema
-    SSSS.split( secret, threshold, shares)
-    SSSS.combine( *shared_secrets )
+    include HELPEMA
+
+    Helpema.requires <<-GEMS
+      awesome_print ~>1.8
+      base_convert ~>4.0
+      entropia ~>0.1
+    GEMS
+    #=> ["awesome_print", "base_convert", "entropia"]
+    # Returns the list of loaded gems.
+    # For those quick little scripts one writes in one's bin
+    # that annoyingly keep falling out of maintainance... right?
+
+    SSSS.split("Top Secret!", threshold: 2, shares: 3)
+    #~> ^\["1-\h+", "2-\h+", "3-\h+"\]$
+    # Note that the split has random outputs on the same inputs.
+
+    SSSS.combine("3-055562917c41e68c6ab2c8", "1-27bf3cbfe8d2c25c7e8928")
+    #=> Top Secret!
+    # Pregenerated splits combine to reproduce the secret.
+
+    list = []
+    url = 'https://www.youtube.com/watch?v=u4oK3ZSccZI'
+    YouTubeDL.json(url){|json| list.push json}
+    # The url was for just one video
+    list.length #=> 1
+    json = list[0]
+    json['title'] #=> "Fortnite Easy Last Ten"
+
     ZBar.cam( timeout=3 ) # Reads qrcodes on camera.
     ZBar.screen # Reads qrcodes on screen.
-    YouTubeDL.json( url ){|obj| obj.inspect }
 
 ## INSTALL:
 
     $ sudo gem install helpema
+
+## FEATURES:
+
+* Autoloaded: no need to pick and choose which library component to require.
 
 ## LICENSE:
 

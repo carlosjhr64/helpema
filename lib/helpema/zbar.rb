@@ -1,9 +1,8 @@
 require 'timeout'
 require 'tmpdir'
 
-module Helpema
+module HELPEMA
 module ZBar
-
   def self.cam(timeout=3)
     raw = ''
     IO.popen('zbarcam --nodisplay --raw --prescale=800x800', 'r') do |io|
@@ -35,6 +34,5 @@ module ZBar
     end
     raw
   end
-
 end
 end

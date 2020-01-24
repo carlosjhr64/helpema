@@ -1,27 +1,34 @@
 require 'open3'
 
-module Helpema
+module HELPEMA
 module SSSS
-
-  def self.split(pwd, t, n)
+  # Note how the function mirrors the command line options.
+  def self.split(secret, t0=2, n0=3,
+                 t: t0, n: n0,
+                 threshold: t, shares: n,
+                 w: nil, s: nil, x: false,
+                 token: w, level: s, hexmode: x)
     pwds = nil
-    Open3.popen3("ssss-split -Q -t #{t} -n #{n}") do |stdin, stdout, stderr|
-      stdin.puts pwd
+    command = "ssss-split -Q -t #{threshold} -n #{shares}"
+    command << " -w #{token}"  if token
+    command << " -s #{level}"  if level
+    command << " -x"           if hexmode
+    Open3.popen3(command) do |stdin, stdout, stderr|
+      stdin.puts secret
       stdin.close
-      pwds = stdout.read.strip.split
+      pwds = stdout.read.split("\n")
     end
     return pwds
   end
 
   def self.combine(*pwds)
     pwd = ''
-    Open3.popen3("ssss-combine -Q -t #{pwds.length}") do |stdin, stdout, stderr|
+    Open3.popen3("ssss-combine -q -t #{pwds.length}") do |stdin, stdout, stderr|
       pwds.each{|p| stdin.puts p}
       stdin.close
-      pwd = stderr.read.strip.split.last
+      pwd = stderr.read.split("\n").last
     end
     return pwd
   end
-
 end
 end
