@@ -13,16 +13,24 @@ Gem::Specification.new do |s|
 
   s.description = <<DESCRIPTION
 Meant to be an eclectic collection of useful single functions and wrappers.
-Wrappers: ssss-split, ssss-combine, zbarcam, youtube-dl -j.
-Funtions: requires("gemname version",...).
+
+Wrappers:
+
+* ssss-split
+* ssss-combine
+* zbarcam
+* youtube-dl -j
+
+Functions:
+
+* requires("gemname version",...)
+* params(arg,...){|h Hash[Class,Obj]|...}
 
 More later.
 DESCRIPTION
 
   s.summary = <<SUMMARY
 Meant to be an eclectic collection of useful single functions and wrappers.
-Wrappers: ssss-split, ssss-combine, zbarcam, youtube-dl -j.
-Funtions: requires("gemname version",...).
 SUMMARY
 
   s.require_paths = ['lib']
