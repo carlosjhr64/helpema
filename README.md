@@ -1,14 +1,24 @@
 # helpema
 
-* [VERSION 2.0.200124](https://github.com/carlosjhr64/helpema/releases)
+* [VERSION 2.1.200129](https://github.com/carlosjhr64/helpema/releases)
 * [github](https://github/carlosjhr64/helpema)
 * [rubygems](https://rubygems/gems/helpema)
 
 ## DESCRIPTION:
 
 Meant to be an eclectic collection of useful single functions and wrappers.
-Wrappers: ssss-split, ssss-combine, zbarcam, youtube-dl -j.
-Functions: requires("gemname version",...).
+
+Wrappers:
+
+* ssss-split
+* ssss-combine
+* zbarcam
+* youtube-dl -j
+
+Functions:
+
+* requires("gemname version",...)
+* params(arg,...){|h Hash[Class,Obj]|...}
 
 More later.
 
@@ -26,6 +36,22 @@ More later.
     # Returns the list of loaded gems.
     # For those quick little scripts one writes in one's bin
     # that annoyingly keep falling out of maintainance... right?
+
+    s0 = s1  = i = f0 = f1 = r = nil
+    Helpema.params(1, 2.0, 3, "Five", /Six/, "Seven", /Eight/) do |params|
+      s0 = params[String][0]
+      s1 = params[String][1]
+      i  = params[Integer][0]
+      f0 = params[Float][0]
+      f1 = params[Float][1]
+      r  = params[Regexp][0]
+    end
+    s0 #=> "Five"
+    s1 #=> "Seven"
+    i  #=> 1
+    f0 #=> 2.0
+    f1 #=> nil
+    r  #=> /Six/
 
     SSSS.split("Top Secret!", threshold: 2, shares: 3)
     #~> ^\["1-\h+", "2-\h+", "3-\h+"\]$

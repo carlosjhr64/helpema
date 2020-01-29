@@ -1,5 +1,5 @@
 module HELPEMA
-  VERSION = '2.0.200124'
+  VERSION = '2.1.200129'
 
   autoload :Helpema,   'helpema/helpema.rb'
   autoload :SSSS,      'helpema/ssss.rb'

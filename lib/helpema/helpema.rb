@@ -11,6 +11,11 @@ module Helpema
     end
     loaded
   end
+
+  def params(*args)
+    yield args.inject(Hash.new{|h,k|h[k]=[]}){|h,v|h[v.class].push(v) && h}
+  end
+
   extend self
 end
 end
