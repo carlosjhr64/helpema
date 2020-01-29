@@ -8,7 +8,7 @@
 
 Meant to be an eclectic collection of useful single functions and wrappers.
 Wrappers: ssss-split, ssss-combine, zbarcam, youtube-dl -j.
-Funtions: requires("gemname version",...).
+Functions: requires("gemname version",...).
 
 More later.
 

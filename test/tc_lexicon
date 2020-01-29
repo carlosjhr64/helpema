@@ -1,0 +1,17 @@
+#!/usr/bin/ruby
+require 'test/unit'
+require 'rubbish'
+
+# This just checks that the lexicon of the files in
+#   lib/**.rb
+# has not changed.  No dictionary maintainance required.
+# Just ensure you have no typos...
+# then set the hex to the observed value.
+# BTW, if spell returns no errors, hex is
+#   d41d8cd98f00b204e9800998ecf8427e
+class TestLexicon < Test::Unit::TestCase
+  def test_lexicon
+    hex = Rubbish.fish('cat lib/**.rb | spell | md5sum').split.first
+    assert_equal '48a073cf1a1e805b94a834b36bda28ee', hex, 'Hexdigest'
+  end
+end
