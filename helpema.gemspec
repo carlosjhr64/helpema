@@ -34,7 +34,6 @@ Wrappers:
 * zbarcam
 * zbarimg
 * youtube-dl
-
 DESCRIPTION
 
   s.summary = <<SUMMARY
