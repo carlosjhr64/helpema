@@ -14,19 +14,27 @@ Gem::Specification.new do |s|
   s.description = <<DESCRIPTION
 Meant to be an eclectic collection of useful single functions and wrappers.
 
+Functions:
+
+* requires
+* to_opt
+* run_command
+* define_command
+
+Refinements:
+
+* Array#classify
+* String#satisfies?
+* Symbol#to_opt
+
 Wrappers:
 
 * ssss-split
 * ssss-combine
 * zbarcam
-* youtube-dl -j
+* zbarimg
+* youtube-dl
 
-Functions:
-
-* requires("gemname version",...)
-* params(arg,...){|h Hash[Class,Obj]|...}
-
-More later.
 DESCRIPTION
 
   s.summary = <<SUMMARY
@@ -43,10 +51,12 @@ lib/helpema/youtubedl.rb
 lib/helpema/zbar.rb
   )
 
-  s.requirements << 'ruby: ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux]'
+  s.requirements << 'ruby: ruby 3.0.0p0 (2020-12-25 revision 95aff21468) [x86_64-linux]'
+  s.requirements << 'youtube-dl: 2020.12.29'
   s.requirements << 'ssss-split: 0.5'
   s.requirements << 'ssss-combine: 0.5'
   s.requirements << 'zbarcam: 0.23'
-  s.requirements << 'gnome-screenshot: gnome-screenshot 3.34.0'
+  s.requirements << 'zbarimg: 0.23'
+  s.requirements << 'gnome-screenshot: gnome-screenshot 3.38.0'
 
 end

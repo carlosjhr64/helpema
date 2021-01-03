@@ -10,11 +10,11 @@ Meant to be an eclectic collection of useful single functions and wrappers.
 
 Functions:
 
-* requires("gemname version",...)
+* requires
 * to_opt
 * run_command
 * define_command
-*
+
 Refinements:
 
 * Array#classify
@@ -27,9 +27,7 @@ Wrappers:
 * ssss-combine
 * zbarcam
 * zbarimg
-* youtube-dl -j
-
-More later.
+* youtube-dl
 
 ## SYNOPSIS:
 
