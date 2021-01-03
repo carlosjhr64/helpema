@@ -1,20 +1,24 @@
 require 'json'
-require 'open3'
 
-module HELPEMA
+module Helpema
 module YouTubeDL
-  def self.json(url, pwd=nil)
-    Open3.popen2e("youtube-dl -j '#{url}'") do |i, o|
-      i.puts pwd if pwd
-      i.close
-      o.each do |line|
-        begin
-          yield JSON.parse line
-        rescue JSON::ParserError
-          yield line
-        end
+class << self
+  attr_accessor :version
+  YouTubeDL.version = '^202\d\.[01]\d\.[0123]\d$'
+
+  # def json(url: : String) => {}(JSON|String)
+  define_command(:json,
+    cmd: 'youtube-dl', version: YouTubeDL.version,
+    usage: {j:true, arg0:nil}, synonyms: {url: :arg0},
+  ) do |pipe, options, blk|
+    pipe.each do |data|
+      begin
+        data = JSON.parse data
+      ensure
+        blk.call data
       end
     end
   end
+end
 end
 end

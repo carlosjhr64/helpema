@@ -1,38 +1,40 @@
-require 'timeout'
 require 'tmpdir'
 
-module HELPEMA
+module Helpema
 module ZBar
-  def self.cam(timeout=3)
-    raw = ''
-    IO.popen('zbarcam --nodisplay --raw --prescale=800x800', 'r') do |io|
-      begin
-        Timeout.timeout(timeout) do
-          raw << io.gets
-          while q = io.gets
-            break if q=="\n"
-            raw << q
-          end
-          raw.strip!
-        end
-      rescue Timeout::Error
-        raw = nil
-        $stderr.puts $!
-      ensure
-        Process.kill('INT', io.pid)
-      end
+class << self
+  attr_accessor :version, :screenshot
+  ZBar.version = '^0\.2[345]$' # version as of this writing is 0.23
+  ZBar.screenshot = ['gnome-screenshot', '-f']
+
+  define_command(:cam,
+    cmd: 'zbarcam', version: ZBar.version,
+    usage: {raw:true,quiet:true,nodisplay:true, :prescale= => '800x800'},
+    synonyms: {prescale: :prescale=}
+  ) do |pipe, kw, blk|
+    begin
+      pipe.gets.chomp # This is the return value!
+    ensure
+      Process.kill('TERM', pipe.pid)
+    end
+  end
+
+  define_command(:img, cmd: 'zbarimg', version: ZBar.version,
+                 usage: {q:true,raw:true,arg0:nil}, synonyms: {filename: :arg0})
+
+  def screen
+    raw = nil
+    Dir.mktmpdir do |tmpdir|
+     _ = File.join(tmpdir, "#{$$}.#{Time.now.to_f}.png")
+     raw = _ if snapshot(_) and not (_=ZBar.img(filename:_).chomp).empty?
     end
     raw
   end
 
-  def self.screen
-    raw = nil
-    Dir.mktmpdir do |tmpdir|
-      screenshot = File.join(tmpdir, "#{$$}.#{Time.now.to_f}.png")
-      system "gnome-screenshot -f #{screenshot}"
-      raw = `zbarimg -q --raw #{screenshot}`.strip
-    end
-    raw
+  private
+  def snapshot(filename)
+    system(*ZBar.screenshot, filename)
   end
+end
 end
 end

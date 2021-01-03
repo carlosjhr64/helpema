@@ -1,15 +1,15 @@
 #! ruby
 require 'test/unit'
-require 'helpema/ssss'
-include HELPEMA
+require 'helpema'
+include Helpema
 
 class TestSSSS < Test::Unit::TestCase
   def test_ssss
     assert_nothing_raised() do
-      pwds = SSSS.split('MyTopSecretPassphrase', 3, 6)
+      pwds = SSSS.split(secret: 'MyTopSecretPassphrase', threshold: 3, shares: 6)
       assert_equal 6, pwds.length
-      secret1 = SSSS.combine(pwds[1], pwds[3], pwds[5])
-      secret2 = SSSS.combine(pwds[0], pwds[2], pwds[4])
+      secret1 = SSSS.combine(secrets: [pwds[1], pwds[3], pwds[5]], threshold: 3)
+      secret2 = SSSS.combine(secrets: [pwds[0], pwds[2], pwds[4]], threshold: 3)
       assert_equal 'MyTopSecretPassphrase', secret1
       assert_equal 'MyTopSecretPassphrase', secret2
     end
