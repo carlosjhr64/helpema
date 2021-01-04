@@ -1,6 +1,6 @@
 # helpema
 
-* [VERSION 3.0.210103](https://github.com/carlosjhr64/helpema/releases)
+* [VERSION 3.0.210104](https://github.com/carlosjhr64/helpema/releases)
 * [github](https://github/carlosjhr64/helpema)
 * [rubygems](https://rubygems/gems/helpema)
 
@@ -11,15 +11,17 @@ Meant to be an eclectic collection of useful single functions and wrappers.
 Functions:
 
 * requires
-* to_opt
+* to_arg
 * run_command
 * define_command
 
 Refinements:
 
 * Array#classify
+* Array#to_arg
+* Hash#to_args
 * String#satisfies?
-* Symbol#to_opt
+* Symbol#to_flag
 
 Wrappers:
 
@@ -47,14 +49,14 @@ base_convert  ~>4.0
 entropia      ~>0.1'
 #=> ["base_convert", "entropia"]
 
-### to_opt ###
+### to_arg ###
 # A helper function to do system command calls.
-to_opt :q, true             #=> "-q"
-to_opt :quiet, true         #=> "--quiet"
-to_opt :verbose, false      #=> nil
-to_opt :f, '/path-to/file'  #=> ["-f", "/path-to/file"]
-to_opt :geo=, '10x20'       #=> "--geo=10x20"
-to_opt :arg0, 'Hello World' #=> "Hello World"
+to_arg :q, true             #=> "-q"
+to_arg :quiet, true         #=> "--quiet"
+to_arg :verbose, false      #=> nil
+to_arg :f, '/path-to/file'  #=> ["-f", "/path-to/file"]
+to_arg :geo=, '10x20'       #=> "--geo=10x20"
+to_arg :arg0, 'Hello World' #=> "Hello World"
 
 ### run_command ###
 # Automates pipe creation to a system command.
@@ -69,10 +71,10 @@ date(d: 'Dec 31, 2020') #=> "Thu Dec 31 12:00:00 AM PST 2020\n"
 
 using Helpema # for refinements
 
-### Symbol#to_opt ###
-:a.to_opt    #=> "-a"
-:abc.to_opt  #=> "--abc"
-:arg0.to_opt #=> nil
+### Symbol#to_flag ###
+:a.to_flag    #=> "-a"
+:abc.to_flag  #=> "--abc"
+:arg0.to_flag #=> nil
 
 ### String#satisfies? ###
 # Uses Gem::Requirement and Gem::Version to check version strings.
