@@ -1,0 +1,75 @@
+#! ruby
+require 'test/unit'
+require 'helpema'
+
+class TestVersion < Test::Unit::TestCase
+  using Helpema
+  include Helpema
+
+  def test_satisfes
+    assert_equal false, '1.1'.satisfies?('>1.1', '<1.3')
+    assert_equal true, ' 1.2'.satisfies?('>1.1', '<1.3')
+    assert_equal false, '1.3'.satisfies?('>1.1', '<1.3')
+
+    assert_equal false, '2.6.9'.satisfies?('~>2.7')
+    assert_equal true,  '2.7.0'.satisfies?('~>2.7')
+    assert_equal true, ' 2.9.9'.satisfies?('~>2.7')
+    assert_equal false, '3.0.0'.satisfies?('~>2.7')
+  end
+
+  def test_to_args
+    h = {a: 'A', bb: 'BB', :c= => 'C', d0: 'D', ee: nil, f: false, gee: true, x: true}
+    assert_equal ['-a','A', '--bb', 'BB', '--c=C', 'D', '--gee', '-x'], h.to_args
+    assert_equal ['-a','A'], [:a,'A'].to_arg
+    assert_equal '--a=A', [:a=,'A'].to_arg
+    error = assert_raises(ArgumentError){ [:a,'A','B'].to_arg}
+    assert_match /wrong number of arguments/, error.message
+    error = assert_raises(NoMethodError){ ['--a','A'].to_arg}
+    assert_match /to_flag/, error.message
+    assert_equal '-a', :a.to_flag
+    assert_equal '--aa', :aa.to_flag
+    assert_equal nil, :aa0.to_flag
+  end
+
+  def test_array_classify
+    a = [1, 2.0, :three, 'Four', /Five/, /Six/, :seven, 8]
+    h = {Integer => [1,8], Float => [2.0], Symbol => [:three,:seven], String => ['Four'], Regexp => [/Five/,/Six/]}
+    assert_equal h, a.classify
+  end
+
+  def test_run_command
+    assert_equal '2020-12-31', run_command('date', {d: 'Dec 31, 2020', format0: '+%Y-%m-%d'}).chomp
+  end
+
+  def test_define_command
+    Helpema.define_command(:this_date, cmd: 'date')
+    assert_equal '2020-12-31', this_date(d: 'Dec 31, 2020', format0: '+%Y-%m-%d').chomp
+    # Notice that...
+    error = assert_raises(NoMethodError) do
+      define_command(:that_date, cmd: 'date')
+    end
+    assert_match /undefined method .define_method/, error.message
+    # a quirk of the TestVersion sandbox
+  end
+
+  def test_requires
+    loaded = assert_nothing_raised do
+      requires 'ruby ~>3.0', 'helpema ~>3.0'
+    end
+    assert loaded.is_a? Array
+    assert loaded.empty?
+    error = assert_raises(RuntimeError) do
+      requires 'ruby ~>3.0', 'helpema ~>1.0'
+    end
+    assert_match /helpema.*not ~>1.0/, error.message
+    error = assert_raises(RuntimeError) do
+      requires 'ruby ~>1.0', 'helpema ~>3.0'
+    end
+    assert_match /ruby.*not ~>1.0/, error.message
+    loaded = requires'
+    helpema ~>3.0
+    ruby ~>3.0
+    json ~>2.0'
+    assert_equal ['json'], loaded
+  end
+end
