@@ -10,6 +10,7 @@ class << self
   define_command(:json,
     cmd: 'youtube-dl', version: YouTubeDL.version,
     usage: {j:true, arg0:nil}, synonyms: {url: :arg0},
+    err: '/dev/null'
   ) do |pipe, options, blk|
     pipe.each do |data|
       begin
