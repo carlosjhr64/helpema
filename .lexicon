@@ -69,13 +69,13 @@ new
 nil
 nodisplay
 now
-opt
 options
 out
 parse
 pid
 pipe
 popen
+popt
 prescale
 private
 Process

@@ -54,10 +54,10 @@ module Helpema
 
   def run_command(cmd, options={},
     usage:nil, synonyms:nil, mode:'r',
-    exception:nil, opt:{}, forward_pass:nil, &blk)
+    exception:nil, forward_pass:nil, **popt, &blk)
     args,ret = options.to_args(usage:usage,synonyms:synonyms),nil
     $stderr.puts "#{cmd} #{args.join(' ')}" if $DEBUG
-    IO.popen([cmd, *args], mode, **opt) do |pipe|
+    IO.popen([cmd, *args], mode, **popt) do |pipe|
       ret = (forward_pass)? forward_pass.call(pipe, options, blk): (blk)? blk.call(pipe): pipe.read
     end
     (exception.nil? or $?.exitstatus==0)? ret : raise(exception)
@@ -67,7 +67,7 @@ module Helpema
     cmd: name.to_s, version: nil, v: nil,
     usage: nil, synonyms: nil,
     mode: 'r',exception: nil,
-    **opt, &forward_pass)
+    **popt, &forward_pass)
 
     # which version? --version or -v
     if version and not `#{cmd} --version`.strip.match?(version)
@@ -80,7 +80,7 @@ module Helpema
     define_method(name) do |**options, &blk|
       run_command(cmd, options,
         usage:usage, synonyms:synonyms, mode:mode,
-        exception:exception, opt: opt, forward_pass:forward_pass, &blk)
+        exception:exception, forward_pass:forward_pass, **popt, &blk)
     end
   end
 
@@ -93,10 +93,10 @@ module Helpema
         unless reqs.empty?
           case gemname
           when 'helpema'
-            raise "helpema(#{VERSION}) not #{reqs.join(', ')}" unless VERSION.satisfies?(*reqs)
+            raise "helpema #{VERSION} not #{reqs.join(', ')}" unless VERSION.satisfies?(*reqs)
             next
           when 'ruby'
-            raise "ruby(#{RUBY_VERSION}) not #{reqs.join(', ')}" unless RUBY_VERSION.satisfies?(*reqs)
+            raise "ruby #{RUBY_VERSION} not #{reqs.join(', ')}" unless RUBY_VERSION.satisfies?(*reqs)
             next
           else
             gem gemname, *reqs
