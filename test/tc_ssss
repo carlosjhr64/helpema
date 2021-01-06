@@ -5,13 +5,16 @@ include Helpema
 
 class TestSSSS < Test::Unit::TestCase
   def test_ssss
-    assert_nothing_raised() do
-      pwds = SSSS.split(secret: 'MyTopSecretPassphrase', threshold: 3, shares: 6)
-      assert_equal 6, pwds.length
-      secret1 = SSSS.combine(secrets: [pwds[1], pwds[3], pwds[5]], threshold: 3)
-      secret2 = SSSS.combine(secrets: [pwds[0], pwds[2], pwds[4]], threshold: 3)
-      assert_equal 'MyTopSecretPassphrase', secret1
-      assert_equal 'MyTopSecretPassphrase', secret2
+    pwds = SSSS.split(secret: 'MyTopSecretPassphrase', threshold: 3, shares: 6)
+    assert_equal 6, pwds.length
+    secret1 = SSSS.combine(secrets: pwds.shuffle, threshold: 3)
+    secret2 = SSSS.combine(secrets: pwds.shuffle[0..2], threshold: 3)
+    assert_equal 'MyTopSecretPassphrase', secret1
+    assert_equal 'MyTopSecretPassphrase', secret2
+
+    error = assert_raises(RuntimeError) do
+      SSSS.combine(secrets: pwds.shuffle[0..1], threshold: 3)
     end
+    assert_equal 'Need threshold number of secrets.', error.message
   end
 end
