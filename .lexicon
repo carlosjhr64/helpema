@@ -6,7 +6,6 @@ Array
 attr_accessor
 autoload
 blk
-block
 call
 cam
 child

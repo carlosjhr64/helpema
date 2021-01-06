@@ -13,8 +13,6 @@ dev
 dl
 entropia
 exitstatus
-FalseClass
-falses
 Fortnite
 gemname
 geo
@@ -29,8 +27,6 @@ JSON
 maintainance
 MERCHANTABILITY
 mktmpdir
-NilClass
-nils
 nodisplay
 NONINFRINGEMENT
 oK
@@ -50,7 +46,7 @@ SSSS
 stderr
 sublicense
 tmpdir
-TrueClass
+untyped
 url
 www
 youtube

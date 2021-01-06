@@ -14,7 +14,7 @@ module Helpema
       args = usage ? usage.map{|k,v|[k,args[k]]} : args.to_a
       # convert key,value tuples to final list of args
       args.map!(&:to_arg)
-      # get rid of nils
+      # get rid of nil
       args.select!{_1}
       # ...and finally flatten!
       args.flatten!
@@ -22,9 +22,9 @@ module Helpema
     end
   end
   refine ::Array do
-    def classify(hash: Hash.new{|h,k|h[k]=[]}, &block)
+    def classify(hash: Hash.new{|h,k|h[k]=[]})
       self.each{|v| hash[v.class] << v}
-      return block ? block.call(hash) : hash
+      return hash
     end
     def to_arg
       Helpema.to_arg(*self)
@@ -39,7 +39,7 @@ module Helpema
   using Helpema
 
   def to_arg(key,value)
-    # keep only keys with value(no falses or nils)
+    # keep only keys with value(no false or nil)
     return nil unless value
     # assume nil0/--long/-short
     key = key.to_flag

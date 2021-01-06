@@ -7,6 +7,8 @@ class << self
   ZBar.version = '^0\.2[345]$' # version as of this writing is 0.23
   ZBar.screenshot = ['gnome-screenshot', '-f']
 
+  # def cam()
+  # @type method Helpema::ZBar.cam: () -> String?
   define_command(:cam,
     cmd: 'zbarcam', version: ZBar.version,
     usage: {raw:true,quiet:true,nodisplay:true, :prescale= => '800x800'},
@@ -19,6 +21,8 @@ class << self
     end
   end
 
+  # def img(filename:)
+  # @type method Helpema::ZBar.img: (filename: String filename) -> String?
   define_command(:img, cmd: 'zbarimg', version: ZBar.version,
                  usage: {q:true,raw:true,arg0:nil}, synonyms: {filename: :arg0})
 
