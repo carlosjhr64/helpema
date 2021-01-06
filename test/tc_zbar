@@ -10,6 +10,6 @@ class TestHelpema < Test::Unit::TestCase
       q = ZBar.screen
       assert_nil q
     end
-    assert_equal '@ELTOROIT', ZBar.img(filename: 'test/qrcode.png').chomp
+    assert_equal '@ELTOROIT', ZBar.img('test/qrcode.png').chomp
   end
 end
