@@ -7,11 +7,11 @@ module Helpema
   refine ::Hash do
     def to_args(usage:nil, synonyms:nil)
       # create separate args from self with the translated synonyms
-      args = self.transform_keys{synonyms&.[](_1) || _1}
+      args = self.transform_keys(synonyms.to_h)
       # pad usage's defaults to args
       usage&.each{|key,default| args[key]=default unless args.has_key? key}
       # order might be important so enforce usage
-      args = usage ? usage.map{|k,v|[k,args[k]]} : args.to_a
+      args = usage&.map{|k,v|[k,args[k]]} || args.to_a
       # convert key,value tuples to final list of args
       args.map!(&:to_arg)
       # get rid of nil

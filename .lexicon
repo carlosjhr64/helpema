@@ -7,6 +7,7 @@ attr_accessor
 autoload
 blk
 call
+_cam
 cam
 child
 chomp
@@ -45,10 +46,12 @@ Hash
 has_key
 Helpema
 hexmode
+_img
 img
 IO
 j
 join
+_json
 json
 JSON
 k
@@ -127,6 +130,7 @@ to_arg
 to_args
 to_f
 to_flag
+to_h
 token
 to_s
 transform_keys

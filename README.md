@@ -1,41 +1,21 @@
-# helpema
+# Helpema
 
-* [VERSION 3.0.210106](https://github.com/carlosjhr64/helpema/releases)
-* [github](https://github/carlosjhr64/helpema)
-* [rubygems](https://rubygems/gems/helpema)
+* [VERSION 3.0.210107](https://github.com/carlosjhr64/helpema/releases)
+* [github](https://github.com/carlosjhr64/helpema)
+* [rubygems](https://rubygems.org/gems/helpema)
 
 ## DESCRIPTION:
 
 Meant to be an eclectic collection of useful single functions and wrappers.
 
-Functions:
-
-* requires
-* to_arg
-* run_command
-* define_command
-
-Refinements:
-
-* Array#classify
-* Array#to_arg
-* Hash#to_args
-* String#satisfies?
-* Symbol#to_flag
-
-Wrappers:
-
-* ssss-split
-* ssss-combine
-* zbarcam
-* zbarimg
-* youtube-dl
+Featured method: `requires "good ~>3.0", "bad ~>2.7", "ugly ~>1.8"`
 
 ## SYNOPSIS:
 
 ```ruby
 require 'helpema'
 include Helpema
+using Helpema
 
 ### requires ###
 # Ensure ruby's and helpema's version.
@@ -49,14 +29,10 @@ base_convert  ~>4.0
 entropia      ~>0.1'
 #=> ["base_convert", "entropia"]
 
-### to_arg ###
-# A helper function to do system command calls.
-to_arg :q, true             #=> "-q"
-to_arg :quiet, true         #=> "--quiet"
-to_arg :verbose, false      #=> nil
-to_arg :f, '/path-to/file'  #=> ["-f", "/path-to/file"]
-to_arg :geo=, '10x20'       #=> "--geo=10x20"
-to_arg :arg0, 'Hello World' #=> "Hello World"
+### String#satisfies? ###
+# Uses Gem::Requirement and Gem::Version to check version strings.
+'1.2.3'.satisfies? '~>1.1' #=> true
+'1.2.3'.satisfies? '~>1.3' #=> false
 
 ### run_command ###
 # Automates pipe creation to a system command.
@@ -66,20 +42,21 @@ run_command('date',{d: 'Dec 31, 2020'}) #=> "Thu Dec 31 12:00:00 AM PST 2020\n"
 ### define_command ###
 # Creates a method out of a system command.
 # See the code for all available features.
-define_command(:date, cmd: 'date')
-date(d: 'Dec 31, 2020') #=> "Thu Dec 31 12:00:00 AM PST 2020\n"
+define_command(:date, cmd: 'date', usage: {d: nil}, synonyms: {string: :d})
+date(string: 'Dec 31, 2020') #=> "Thu Dec 31 12:00:00 AM PST 2020\n"
 
-using Helpema # for refinements
+### to_arg ###
+# A helper function to do system command calls.
+to_arg :q, true             #=> "-q"
+to_arg :quiet, true         #=> "--quiet"
+to_arg :verbose, false      #=> nil
+to_arg :f, '/path-to/file'  #=> ["-f", "/path-to/file"]
+to_arg :geo=, '10x20'       #=> "--geo=10x20"
+to_arg :arg0, 'Hello World' #=> "Hello World"
 
-### Symbol#to_flag ###
-:a.to_flag    #=> "-a"
-:abc.to_flag  #=> "--abc"
-:arg0.to_flag #=> nil
-
-### String#satisfies? ###
-# Uses Gem::Requirement and Gem::Version to check version strings.
-'1.2.3'.satisfies? '~>1.1' #=> true
-'1.2.3'.satisfies? '~>1.3' #=> false
+### Hash#to_args ###
+{q: true, quiet: true, verbose: false, f: '/path-to/file', :geo= => '10x20', arg0: 'Hello World'}.to_args
+#=> ["-q", "--quiet", "-f", "/path-to/file", "--geo=10x20", "Hello World"]
 
 ### Array#classify ###
 # Groups items in Array by class.
@@ -99,7 +76,7 @@ SSSS.combine(secrets: ["3-055562917c41e68c6ab2c8", "1-27bf3cbfe8d2c25c7e8928"], 
 ### YouTubeDL.json ###
 list = []
 url = 'https://www.youtube.com/watch?v=u4oK3ZSccZI'
-YouTubeDL.json(url: url){|json| list.push json}
+YouTubeDL.json(url){|json| list.push json}
 # The url was for just one video
 list.length #=> 1
 json = list[0]
@@ -120,10 +97,6 @@ string = ZBar.cam
 ```shell
 $ gem install helpema
 ```
-
-## FEATURES:
-
-* Autoloaded: no need to pick and choose which library component to require.
 
 ## LICENSE:
 
