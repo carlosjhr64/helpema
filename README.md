@@ -10,6 +10,12 @@ Meant to be an eclectic collection of useful single functions and wrappers.
 
 Featured method: `requires "good ~>3.0", "bad ~>2.7", "ugly ~>1.8"`
 
+## INSTALL:
+
+```shell
+$ gem install helpema
+```
+
 ## SYNOPSIS:
 
 ```ruby
@@ -92,11 +98,13 @@ string_or_nil = ZBar.screen
 string = ZBar.cam
 ```
 
-## INSTALL:
+## TROUBLESHOOTING:
 
-```shell
-$ gem install helpema
-```
+Command version mismatch
+: set `Helpema::WRAPPER.version = "your.version"` or just nil it.
+
+More documentation
+: see [sig/helpema.rb](sig/helpema.rbs) for the expected method signatures.
 
 ## LICENSE:
 
