@@ -4,7 +4,7 @@ module Helpema
 module ZBar
 class << self
   attr_accessor :version, :screenshot
-  ZBar.version = '^0\.2[345]$' # version as of this writing is 0.23
+  ZBar.version = '^0\.2[345]\b' # version as of this writing is 0.23
   ZBar.screenshot = ['gnome-screenshot', '-f']
 
   def cam() = _cam()
