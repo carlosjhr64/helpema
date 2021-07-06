@@ -1,12 +1,11 @@
 #! ruby
 require 'test/unit'
 require 'helpema'
-include Helpema
 
 class TestHelpema < Test::Unit::TestCase
   def test_youtubedl
     assert_nothing_raised() do
-      YouTubeDL.json('caca') do |obj|
+      Helpema::YouTubeDL.json('caca') do |obj|
         assert_equal String, obj.class
         assert_match(/^ERROR:/, obj)
       end
@@ -14,7 +13,7 @@ class TestHelpema < Test::Unit::TestCase
 
     list = []
     url = 'https://www.youtube.com/watch?v=u4oK3ZSccZI'
-    YouTubeDL.json(url){|json| list.push json}
+    Helpema::YouTubeDL.json(url){|json| list.push json}
     assert_equal 1, list.length # The url was for just one video
     assert_equal "Fortnite Easy Last Ten", list[0]['title']
   end
