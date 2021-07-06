@@ -1,15 +1,14 @@
 #! ruby
 require 'test/unit'
 require 'helpema'
-include Helpema
 
 class TestHelpema < Test::Unit::TestCase
   def test_zbar
     assert_nothing_raised() do
       # Just check that it runs, needs "live" testing.
-      q = ZBar.screen
+      q = Helpema::ZBar.screen
       assert_nil q
     end
-    assert_equal '@ELTOROIT', ZBar.img('test/qrcode.png').chomp
+    assert_equal '@ELTOROIT', Helpema::ZBar.img('test/qrcode.png').chomp
   end
 end
