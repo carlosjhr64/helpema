@@ -23,7 +23,7 @@ module Helpema
         Process.kill('TERM', pipe.pid)
       end
     end
-    def cam() = ZBar.cam()
+    def cam() = ZBar._cam()
 
     ZBar.define_command(:_img,
                         cmd: 'zbarimg',

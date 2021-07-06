@@ -19,7 +19,7 @@ module Helpema
         end
       end
     end
-    def json(url, &blk) = _json(url:url, &blk)
+    def json(url, &blk) = YouTubeDL._json(url:url, &blk)
 
     extend self
   end
