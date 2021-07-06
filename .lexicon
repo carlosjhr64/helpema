@@ -82,7 +82,6 @@ pipe
 popen
 popt
 prescale
-private
 Process
 push
 puts
