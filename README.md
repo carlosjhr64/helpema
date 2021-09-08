@@ -1,6 +1,6 @@
 # Helpema
 
-* [VERSION 3.0.210706](https://github.com/carlosjhr64/helpema/releases)
+* [VERSION 3.1.210908](https://github.com/carlosjhr64/helpema/releases)
 * [github](https://github.com/carlosjhr64/helpema)
 * [rubygems](https://rubygems.org/gems/helpema)
 
@@ -30,7 +30,7 @@ using Helpema
 # that annoyingly keep falling out of maintainance... right?
 requires'
 ruby          ~>3.0
-helpema       ~>3.0
+helpema       ~>3.1
 base_convert  ~>4.0
 entropia      ~>0.1'
 #=> ["base_convert", "entropia"]

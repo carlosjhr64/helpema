@@ -15,7 +15,7 @@ module Helpema
       # convert key,value tuples to final list of args
       args.map!(&:to_arg)
       # get rid of nil
-      args.select!{_1}
+      args.compact!
       # ...and finally flatten!
       args.flatten!
       return args
@@ -58,7 +58,9 @@ module Helpema
     args,ret = options.to_args(usage:usage,synonyms:synonyms),nil
     $stderr.puts "#{cmd} #{args.join(' ')}" if $DEBUG
     IO.popen([cmd, *args], mode, **popt) do |pipe|
-      ret = (forward_pass)? forward_pass.call(pipe, options, blk): (blk)? blk.call(pipe): pipe.read
+      ret = forward_pass ? forward_pass.call(pipe, options, blk) :
+                     blk ? blk.call(pipe) :
+                           pipe.read
     end
     (exception.nil? or $?.exitstatus==0)? ret : raise(exception)
   end
@@ -93,10 +95,14 @@ module Helpema
         unless reqs.empty?
           case gemname
           when 'helpema'
-            raise "helpema #{VERSION} not #{reqs.join(', ')}" unless VERSION.satisfies?(*reqs)
+            unless VERSION.satisfies?(*reqs)
+              raise "helpema #{VERSION} not #{reqs.join(', ')}"
+            end
             next
           when 'ruby'
-            raise "ruby #{RUBY_VERSION} not #{reqs.join(', ')}" unless RUBY_VERSION.satisfies?(*reqs)
+            unless RUBY_VERSION.satisfies?(*reqs)
+              raise "ruby #{RUBY_VERSION} not #{reqs.join(', ')}"
+            end
             next
           else
             gem gemname, *reqs

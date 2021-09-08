@@ -14,9 +14,18 @@ module Helpema
       pipe.puts options.fetch(:secret)
       pipe.read.split.last(options[:shares])
     end
-    def split(secret:, threshold:, shares:, token:nil, level:nil, hexmode:false) =
-      SSSS._split(secret:secret, threshold:threshold, shares:shares, token:token, level:level, hexmode:hexmode)
-
+    def split(
+      secret:, threshold:,
+      shares:, token:nil,
+      level:nil,
+      hexmode:false
+    ) = SSSS._split(
+      secret:secret,
+      threshold:threshold,
+      shares:shares,
+      token:token,
+      level:level,
+      hexmode:hexmode)
     SSSS.define_command(:_combine,
       cmd: 'ssss-combine', v: SSSS.version,
       usage: {Q:true,t:2,x:false}, synonyms: {threshold: :t, hexmode: :x},

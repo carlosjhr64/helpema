@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
 
   s.name     = 'helpema'
-  s.version  = '3.0.210706'
+  s.version  = '3.1.210908'
 
   s.homepage = 'https://github.com/carlosjhr64/helpema'
 
   s.author   = 'carlosjhr64'
   s.email    = 'carlosjhr64@gmail.com'
 
-  s.date     = '2021-07-06'
+  s.date     = '2021-09-08'
   s.licenses = ['MIT']
 
   s.description = <<DESCRIPTION
@@ -26,6 +26,7 @@ SUMMARY
 README.md
 lib/helpema.rb
 lib/helpema/helpema.rb
+lib/helpema/gpg.rb
 lib/helpema/ssss.rb
 lib/helpema/youtubedl.rb
 lib/helpema/zbar.rb
@@ -38,5 +39,6 @@ lib/helpema/zbar.rb
   s.requirements << 'zbarcam: 0.23'
   s.requirements << 'zbarimg: 0.23'
   s.requirements << 'gnome-screenshot: gnome-screenshot 40.0'
+  s.requirements << 'gpg: 2.2.27'
 
 end
