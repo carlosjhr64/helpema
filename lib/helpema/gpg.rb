@@ -18,7 +18,8 @@ module Helpema
       synonyms: {
         input: :arg0,
       },
-      mode: 'w+'
+      mode: 'w+',
+      exception: 'gpg failed'
     ) do |pipe, options, blk|
       passphrase, string = options.fetch_values(:passphrase, :string)
       pipe.puts passphrase
