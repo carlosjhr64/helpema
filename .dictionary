@@ -16,7 +16,10 @@ Decrypt
 decrypted
 Decrypted
 dev
+dio
 dl
+eio
+elsif
 entropia
 exitstatus
 fd
@@ -24,6 +27,7 @@ fdeb
 Fortnite
 gemname
 geo
+getbyte
 github
 gpg
 GPG
@@ -32,6 +36,8 @@ Helpema
 hexmode
 https
 img
+ioin
+ioout
 json
 JSON
 maintainance
@@ -42,11 +48,13 @@ nodisplay
 NONINFRINGEMENT
 oK
 pid
+pio
 png
 popen
 popt
 Pregenerated
 prescale
+putc
 qrcodes
 rb
 rbs
@@ -57,6 +65,8 @@ sig
 ssss
 SSSS
 stderr
+stringio
+StringIO
 sublicense
 tmp
 tmpdir

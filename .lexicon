@@ -7,6 +7,7 @@ attr_accessor
 autoload
 batch
 blk
+c
 call
 _cam
 cam
@@ -19,6 +20,7 @@ cmd
 _combine
 combine
 compact
+count
 cryptor
 data
 decrypt
@@ -45,6 +47,7 @@ Gem
 gemname
 gemname_reqs
 gems
+getbyte
 gets
 GPG
 h
@@ -57,6 +60,8 @@ _img
 img
 input
 IO
+ioin
+ioout
 j
 join
 _json
@@ -94,6 +99,7 @@ popt
 prescale
 Process
 push
+putc
 puts
 q
 Q

@@ -104,11 +104,11 @@ string_or_nil = ZBar.screen
 #     string = ZBar.cam
 
 ### GPG Symmetric ###
-# String to String
+## String to String
 encrypted = GPG.encrypt(passphrase: '<Secret>', string: '<Plain Text>')
 decrypted = GPG.decrypt(passphrase: '<Secret>', string: encrypted)
 #=> "<Plain Text>"
-# File to File
+## File to File
 # Got a text file...
 `md5sum tmp/text.txt` #~> ^d27b3111fdeb72f2862909c216214bc1
 # gpg wont overwrite, so need to remove existing...
@@ -120,6 +120,15 @@ GPG.encrypt(passphrase: '<Secret>', input: 'tmp/text.txt', output: 'tmp/text.enc
 GPG.decrypt(passphrase: '<Secret>', input: 'tmp/text.enc', output: 'tmp/text.dec') #=> ""
 # Decrypted file should match...
 `md5sum tmp/text.dec` #~> ^d27b3111fdeb72f2862909c216214bc1
+## IO to IO
+require 'stringio'
+pio = StringIO.new '<Plain>'
+eio = StringIO.new ''
+dio = StringIO.new ''
+GPG.encrypt(passphrase: '<Secret>', ioin: pio, ioout: eio)
+eio.rewind
+GPG.decrypt(passphrase: '<Secret>', ioin: eio, ioout: dio)
+dio.string #=> "<Plain>"
 ```
 
 ## TROUBLESHOOTING:
