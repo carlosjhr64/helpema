@@ -21,35 +21,64 @@ module Helpema
       mode: 'w+',
       exception: 'gpg failed'
     ) do |pipe, options, blk|
-      passphrase, string = options.fetch_values(:passphrase, :string)
+      passphrase, string, ioin, ioout =
+        options.fetch_values(:passphrase, :string, :ioin, :ioout)
       pipe.puts passphrase
       Thread.new do
-        pipe.write string if string
+        if string
+          pipe.write string
+        elsif ioin
+          while c = ioin.getbyte
+            pipe.putc c
+          end
+        end
         pipe.close_write
       end
-      pipe.read
+      if ioout
+        while c = pipe.getbyte
+          ioout.putc c
+        end
+      else
+        pipe.read
+      end
     end
 
-    def encrypt(passphrase:, string:nil, output:nil, input:nil)
-      if (string and input) or (!string and !input)
-        raise "Need string xor input(filename)"
+    def encrypt(passphrase:,
+                string:nil,
+                output:nil,
+                input:nil,
+                ioin:nil,
+                ioout:nil)
+      unless [string,input,ioin].count{_1} == 1
+        raise "Need only one of string, input, or ioin"
       end
+      raise "Can't have both output and ioout" if output and ioout
       GPG.cryptor(symmetric:  true,
                   passphrase: passphrase,
                   string:     string,
                   input:      input,
-                  output:     output)
+                  output:     output,
+                  ioin:       ioin,
+                  ioout:      ioout)
     end
 
-    def decrypt(passphrase:, string:nil, output:nil, input:nil)
-      if (string and input) or (!string and !input)
-        raise "Need string xor input(filename)"
+    def decrypt(passphrase:,
+                string:nil,
+                output:nil,
+                input:nil,
+                ioin:nil,
+                ioout:nil)
+      unless [string,input,ioin].count{_1} == 1
+       raise "Need only one of string, input, or ioin"
       end
+      raise "Can't have both output and ioout" if output and ioout
       GPG.cryptor(decrypt:    true,
                   passphrase: passphrase,
                   string:     string,
                   input:      input,
-                  output:     output)
+                  output:     output,
+                  ioin:       ioin,
+                  ioout:      ioout)
     end
 
     extend self

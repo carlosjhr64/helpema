@@ -1,9 +1,11 @@
 #! ruby
 require 'test/unit'
 require 'helpema'
+require 'stringio'
 
 class TestGPG < Test::Unit::TestCase
   def test_gpg
+    # String to String
     plain = 'Plain Text Stuff'
     encrypted = Helpema::GPG.encrypt(passphrase: 'Secret',
                                      string: plain)
@@ -13,6 +15,7 @@ class TestGPG < Test::Unit::TestCase
     refute plain == encrypted
     assert plain == decrypted
 
+    # File to File
     [enc='tmp/text.enc', dec='tmp/text.dec'].each do |f|
       File.unlink(f) if File.exist?(f)
     end
@@ -24,5 +27,21 @@ class TestGPG < Test::Unit::TestCase
                          input: enc,
                          output: dec)
     assert `md5sum #{dec}`.split[0] == `md5sum #{txt}`.split[0]
+
+    # IO to IO
+    p = 'This boring plain text is very secret.'
+    pio = StringIO.new p
+    eio = StringIO.new ''
+    dio = StringIO.new ''
+    Helpema::GPG.encrypt(passphrase: 'Secret',
+                         ioin: pio,
+                         ioout: eio)
+    eio.rewind
+    Helpema::GPG.decrypt(passphrase: 'Secret',
+                         ioin: eio,
+                         ioout: dio)
+    assert pio.string == p
+    refute eio.string == p
+    assert dio.string == p
   end
 end
