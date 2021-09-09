@@ -12,7 +12,7 @@ Featured method: `requires "good ~>3.0", "bad ~>2.7", "ugly ~>1.8"`
 
 ## INSTALL:
 
-```shell
+```console
 $ gem install helpema
 ```
 
@@ -61,7 +61,12 @@ to_arg :geo=, '10x20'       #=> "--geo=10x20"
 to_arg :arg0, 'Hello World' #=> "Hello World"
 
 ### Hash#to_args ###
-{q: true, quiet: true, verbose: false, f: '/path-to/file', :geo= => '10x20', arg0: 'Hello World'}.to_args
+{ q:       true,
+  quiet:   true,
+	verbose: false,
+	f:       '/path-to/file',
+	:geo= => '10x20',
+  arg0:    'Hello World' }.to_args
 #=> ["-q", "--quiet", "-f", "/path-to/file", "--geo=10x20", "Hello World"]
 
 ### Array#classify ###
@@ -76,7 +81,8 @@ SSSS.split(secret: "Top Secret!", threshold: 2, shares: 3)
 
 #### SSSS.combine ###
 # Pregenerated splits combine to reproduce the secret.
-SSSS.combine(secrets: ["3-055562917c41e68c6ab2c8", "1-27bf3cbfe8d2c25c7e8928"], threshold: 2)
+SSSS.combine(secrets: ["3-055562917c41e68c6ab2c8", "1-27bf3cbfe8d2c25c7e8928"],
+             threshold: 2)
 #=> "Top Secret!"
 
 ### YouTubeDL.json ###
@@ -95,7 +101,25 @@ string_or_nil = ZBar.screen
 ### ZBar.cam ###
 # Reads qrcodes from camera.
 # You may want to wrap this one in a Timeout block.
-string = ZBar.cam
+#     string = ZBar.cam
+
+### GPG Symmetric ###
+# String to String
+encrypted = GPG.encrypt(passphrase: '<Secret>', string: '<Plain Text>')
+decrypted = GPG.decrypt(passphrase: '<Secret>', string: encrypted)
+#=> "<Plain Text>"
+# File to File
+# Got a text file...
+`md5sum tmp/text.txt` #~> ^d27b3111fdeb72f2862909c216214bc1
+# gpg wont overwrite, so need to remove existing...
+File.exist?(_='tmp/text.enc') and File.unlink(_)
+File.exist?(_='tmp/text.dec') and File.unlink(_)
+# Encrypt text file...
+GPG.encrypt(passphrase: '<Secret>', input: 'tmp/text.txt', output: 'tmp/text.enc') #=> ""
+# Decrypt encrypted file...
+GPG.decrypt(passphrase: '<Secret>', input: 'tmp/text.enc', output: 'tmp/text.dec') #=> ""
+# Decrypted file should match...
+`md5sum tmp/text.dec` #~> ^d27b3111fdeb72f2862909c216214bc1
 ```
 
 ## TROUBLESHOOTING:
@@ -110,7 +134,7 @@ More documentation
 
 (The MIT License)
 
-Copyright (c) 2021 carlosjhr64
+Copyright (c) 2021 CarlosJHR64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

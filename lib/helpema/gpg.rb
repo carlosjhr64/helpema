@@ -23,8 +23,10 @@ module Helpema
     ) do |pipe, options, blk|
       passphrase, string = options.fetch_values(:passphrase, :string)
       pipe.puts passphrase
-      pipe.write string if string
-      pipe.close_write
+      Thread.new do
+        pipe.write string if string
+        pipe.close_write
+      end
       pipe.read
     end
 

@@ -1,0 +1,28 @@
+#! ruby
+require 'test/unit'
+require 'helpema'
+
+class TestGPG < Test::Unit::TestCase
+  def test_gpg
+    plain = 'Plain Text Stuff'
+    encrypted = Helpema::GPG.encrypt(passphrase: 'Secret',
+                                     string: plain)
+    decrypted = Helpema::GPG.decrypt(passphrase: 'Secret',
+                                     string: encrypted)
+
+    refute plain == encrypted
+    assert plain == decrypted
+
+    [enc='tmp/text.enc', dec='tmp/text.dec'].each do |f|
+      File.unlink(f) if File.exist?(f)
+    end
+    txt = 'tmp/text.txt'
+    Helpema::GPG.encrypt(passphrase: 'Secret',
+                         input: txt,
+                         output: enc)
+    Helpema::GPG.decrypt(passphrase: 'Secret',
+                         input: enc,
+                         output: dec)
+    assert `md5sum #{dec}`.split[0] == `md5sum #{txt}`.split[0]
+  end
+end
