@@ -15,7 +15,7 @@ module Helpema
       exception: 'ffmpeg failed',
       err: '/dev/null')
     def hash(filename, digest:'sha160')
-      FFMPEG._hash(filename:filename, digest:digest).split('=').last
+      FFMPEG._hash(filename:filename, digest:digest).strip.split('=').last
     end
 
     extend self
