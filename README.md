@@ -1,6 +1,6 @@
 # Helpema
 
-* [VERSION 3.1.210909](https://github.com/carlosjhr64/helpema/releases)
+* [VERSION 3.2.210923](https://github.com/carlosjhr64/helpema/releases)
 * [github](https://github.com/carlosjhr64/helpema)
 * [rubygems](https://rubygems.org/gems/helpema)
 
@@ -18,6 +18,7 @@ $ gem install helpema
 
 ## SYNOPSIS:
 
+### requires
 ```ruby
 require 'helpema'
 include Helpema
@@ -34,23 +35,31 @@ helpema       ~>3.1
 base_convert  ~>4.0
 entropia      ~>0.1'
 #=> ["base_convert", "entropia"]
-
+```
+### String#satisfies?
+```ruby
 ### String#satisfies? ###
 # Uses Gem::Requirement and Gem::Version to check version strings.
 '1.2.3'.satisfies? '~>1.1' #=> true
 '1.2.3'.satisfies? '~>1.3' #=> false
-
+```
+### run_command
+```ruby
 ### run_command ###
 # Automates pipe creation to a system command.
 # See the code for all available features.
 run_command('date',{d: 'Dec 31, 2020'}) #=> "Thu Dec 31 12:00:00 AM PST 2020\n"
-
+```
+### define_command
+```ruby
 ### define_command ###
 # Creates a method out of a system command.
 # See the code for all available features.
 define_command(:date, cmd: 'date', usage: {d: nil}, synonyms: {string: :d})
 date(string: 'Dec 31, 2020') #=> "Thu Dec 31 12:00:00 AM PST 2020\n"
-
+```
+### to_arg
+```ruby
 ### to_arg ###
 # A helper function to do system command calls.
 to_arg :q, true             #=> "-q"
@@ -59,7 +68,9 @@ to_arg :verbose, false      #=> nil
 to_arg :f, '/path-to/file'  #=> ["-f", "/path-to/file"]
 to_arg :geo=, '10x20'       #=> "--geo=10x20"
 to_arg :arg0, 'Hello World' #=> "Hello World"
-
+```
+### Hash#to_args
+```ruby
 ### Hash#to_args ###
 { q:       true,
   quiet:   true,
@@ -68,23 +79,31 @@ to_arg :arg0, 'Hello World' #=> "Hello World"
 	:geo= => '10x20',
   arg0:    'Hello World' }.to_args
 #=> ["-q", "--quiet", "-f", "/path-to/file", "--geo=10x20", "Hello World"]
-
+```
+### Array#classify
+```ruby
 ### Array#classify ###
 # Groups items in Array by class.
 [1, 2.0, :Three, 'Four', /Five/, :Six, 'Seven'].classify
 #=> {Integer=>[1], Float=>[2.0], Symbol=>[:Three, :Six], String=>["Four", "Seven"], Regexp=>[/Five/]}
-
+```
+### SSSS.split
+```ruby
 ### SSSS.split ####
 SSSS.split(secret: "Top Secret!", threshold: 2, shares: 3)
 #~> ^\["1-\h+", "2-\h+", "3-\h+"\]$
 # Note that the split has random outputs on the same inputs.
-
+```
+### SSS.combine
+```ruby
 #### SSSS.combine ###
 # Pregenerated splits combine to reproduce the secret.
 SSSS.combine(secrets: ["3-055562917c41e68c6ab2c8", "1-27bf3cbfe8d2c25c7e8928"],
              threshold: 2)
 #=> "Top Secret!"
-
+```
+### YouTubeDL.json
+```ruby
 ### YouTubeDL.json ###
 list = []
 url = 'https://www.youtube.com/watch?v=u4oK3ZSccZI'
@@ -93,16 +112,24 @@ YouTubeDL.json(url){|json| list.push json}
 list.length #=> 1
 json = list[0]
 json['title'] #=> "Fortnite Easy Last Ten"
-
+```
+### YouTubeDL.mp3
+### FFMPEG.hash
+### ZBar.screen
+```ruby
 ### ZBar.screen ###
 # Reads qrcodes on screen.
 string_or_nil = ZBar.screen
-
+```
+### ZBar.cam
+```ruby
 ### ZBar.cam ###
 # Reads qrcodes from camera.
 # You may want to wrap this one in a Timeout block.
 #     string = ZBar.cam
-
+```
+### GPG.encrypt and GPG.decrypt
+```ruby
 ### GPG Symmetric ###
 ## String to String
 encrypted = GPG.encrypt(passphrase: '<Secret>', string: '<Plain Text>')

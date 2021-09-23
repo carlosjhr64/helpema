@@ -1,6 +1,12 @@
 _
 _1
 arg0
+arg1
+arg2
+arg3
+arg4
+arg5
+arg6
 args
 Array
 attr_accessor
@@ -27,6 +33,7 @@ decrypt
 default
 define_command
 define_method
+digest
 Dir
 each
 empty
@@ -37,6 +44,7 @@ exitstatus
 extend
 fetch
 fetch_values
+FFMPEG
 File
 filename
 first
@@ -51,6 +59,7 @@ getbyte
 gets
 GPG
 h
+_hash
 hash
 Hash
 has_key
@@ -81,6 +90,8 @@ map
 match
 mktmpdir
 mode
+_mp3
+mp3
 n
 name
 new

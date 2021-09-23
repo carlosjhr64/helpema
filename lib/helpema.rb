@@ -1,5 +1,5 @@
 module Helpema
-  VERSION = '3.1.210909'
+  VERSION = '3.2.210923'
 
   require_relative     'helpema/helpema'
 
@@ -7,6 +7,7 @@ module Helpema
   autoload :YouTubeDL, 'helpema/youtubedl.rb'
   autoload :ZBar,      'helpema/zbar.rb'
   autoload :GPG,       'helpema/gpg.rb'
+  autoload :FFMPEG,    'helpema/ffmpeg.rb'
 end
 
 # Requires:

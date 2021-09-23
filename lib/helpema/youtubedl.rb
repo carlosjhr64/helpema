@@ -21,6 +21,17 @@ module Helpema
     end
     def json(url, &blk) = YouTubeDL._json(url:url, &blk)
 
+    YouTubeDL.define_command(:_mp3,
+      cmd: 'youtube-dl', version: YouTubeDL.version,
+      usage: { output: nil,
+               'extract-audio': true,
+               'audio-format': true,
+               arg0: 'mp3',
+               arg1: nil },
+      synonyms: {url: :arg1},
+      err: '/dev/null')
+    def mp3(url, output:'%(id)s.%(ext)s') = YouTubeDL._mp3(url:url, output:output)
+
     extend self
   end
 end

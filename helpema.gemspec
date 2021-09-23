@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
 
   s.name     = 'helpema'
-  s.version  = '3.1.210909'
+  s.version  = '3.2.210923'
 
   s.homepage = 'https://github.com/carlosjhr64/helpema'
 
   s.author   = 'CarlosJHR64'
   s.email    = 'carlosjhr64@gmail.com'
 
-  s.date     = '2021-09-09'
+  s.date     = '2021-09-23'
   s.licenses = ['MIT']
 
   s.description = <<DESCRIPTION

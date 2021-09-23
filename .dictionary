@@ -24,6 +24,8 @@ entropia
 exitstatus
 fd
 fdeb
+ffmpeg
+FFMPEG
 Fortnite
 gemname
 geo
@@ -61,6 +63,7 @@ rbs
 reqs
 ret
 rubygems
+sha
 sig
 ssss
 SSSS
