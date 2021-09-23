@@ -113,8 +113,8 @@ list.length #=> 1
 json = list[0]
 json['title'] #=> "Fortnite Easy Last Ten"
 ```
-### YouTubeDL.mp3
-### FFMPEG.hash
+### YouTubeDL.mp3(url, output: '%(id)s.%(ext)s')
+### FFMPEG.hash(filename, digest: 'sha160')
 ### ZBar.screen
 ```ruby
 ### ZBar.screen ###
