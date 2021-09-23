@@ -25,6 +25,7 @@ SUMMARY
   s.files = %w(
 README.md
 lib/helpema.rb
+lib/helpema/ffmpeg.rb
 lib/helpema/gpg.rb
 lib/helpema/helpema.rb
 lib/helpema/ssss.rb
