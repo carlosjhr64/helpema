@@ -1,5 +1,5 @@
 module Helpema
-  VERSION = '3.2.210923'
+  VERSION = '3.2.210924'
 
   require_relative     'helpema/helpema'
 
