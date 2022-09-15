@@ -1,6 +1,6 @@
 # Helpema
 
-* [VERSION 3.2.210924](https://github.com/carlosjhr64/helpema/releases)
+* [VERSION 3.2.220915](https://github.com/carlosjhr64/helpema/releases)
 * [github](https://github.com/carlosjhr64/helpema)
 * [rubygems](https://rubygems.org/gems/helpema)
 
@@ -170,7 +170,7 @@ More documentation
 
 (The MIT License)
 
-Copyright (c) 2021 CarlosJHR64
+Copyright (c) 2022 CarlosJHR64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

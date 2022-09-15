@@ -24,11 +24,15 @@ module Helpema
     YouTubeDL.define_command(:_mp3,
       cmd: 'youtube-dl', version: YouTubeDL.version,
       usage: { output: nil,
+               format: true,
+               arg0: 'bestaudio',
                'extract-audio': true,
                'audio-format': true,
-               arg0: 'mp3',
-               arg1: nil },
-      synonyms: {url: :arg1},
+               arg1: 'mp3',
+               'audio-quality': true,
+               arg2: 0,
+               arg3: nil },
+      synonyms: {url: :arg3},
       err: '/dev/null')
     def mp3(url, output:'%(id)s.%(ext)s') = YouTubeDL._mp3(url:url, output:output)
 
