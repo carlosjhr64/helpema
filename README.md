@@ -1,6 +1,6 @@
 # Helpema
 
-* [VERSION 3.2.220915](https://github.com/carlosjhr64/helpema/releases)
+* [VERSION 3.2.221207](https://github.com/carlosjhr64/helpema/releases)
 * [github](https://github.com/carlosjhr64/helpema)
 * [rubygems](https://rubygems.org/gems/helpema)
 
@@ -32,8 +32,8 @@ using Helpema
 requires'
 ruby          ~>3.0
 helpema       ~>3.1
-base_convert  ~>4.0
-entropia      ~>0.1'
+base_convert  ~>6.0
+entropia      ~>1.0'
 #=> ["base_convert", "entropia"]
 ```
 ### String#satisfies?
@@ -48,15 +48,15 @@ entropia      ~>0.1'
 ### run_command ###
 # Automates pipe creation to a system command.
 # See the code for all available features.
-run_command('date',{d: 'Dec 31, 2020'}) #=> "Thu Dec 31 12:00:00 AM PST 2020\n"
+run_command('date',{d: 'Dec 31, 2020',I: true}) #=> "2020-12-31\n"
 ```
 ### define_command
 ```ruby
 ### define_command ###
 # Creates a method out of a system command.
 # See the code for all available features.
-define_command(:date, cmd: 'date', usage: {d: nil}, synonyms: {string: :d})
-date(string: 'Dec 31, 2020') #=> "Thu Dec 31 12:00:00 AM PST 2020\n"
+define_command(:date, cmd: 'date', usage: {d: nil, I: true}, synonyms: {string: :d})
+date(string: 'Dec 31, 2020') #=> "2020-12-31\n"
 ```
 ### to_arg
 ```ruby

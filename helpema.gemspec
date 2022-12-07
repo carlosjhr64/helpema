@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
 
   s.name     = 'helpema'
-  s.version  = '3.2.210924'
+  s.version  = '3.2.221207'
 
   s.homepage = 'https://github.com/carlosjhr64/helpema'
 
   s.author   = 'CarlosJHR64'
   s.email    = 'carlosjhr64@gmail.com'
 
-  s.date     = '2021-09-24'
+  s.date     = '2022-12-07'
   s.licenses = ['MIT']
 
   s.description = <<DESCRIPTION
@@ -33,7 +33,7 @@ lib/helpema/youtubedl.rb
 lib/helpema/zbar.rb
   )
 
-  s.requirements << 'ruby: ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x86_64-linux]'
+  s.requirements << 'ruby: ruby 3.1.2p'
   s.requirements << 'youtube-dl: 2021.06.06'
   s.requirements << 'ssss-split: 0.5'
   s.requirements << 'ssss-combine: 0.5'
