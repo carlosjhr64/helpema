@@ -22,8 +22,10 @@ module Helpema
     end
   end
   refine ::Array do
-    def classify(hash: Hash.new{|h,k|h[k]=[]})
-      self.each{|v| hash[v.class] << v}
+    # Like Set#classify
+    def classify(hash: Hash.new{|h,k|h[k]=[]}, &block)
+      block ||= lambda{|v|v.class}
+      self.each{|v| hash[block[v]] << v}
       return hash
     end
     def to_arg

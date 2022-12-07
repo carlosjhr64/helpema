@@ -5,7 +5,7 @@ module Helpema
     extend Helpema
     class << self; attr_accessor :version, :screenshot; end
     ZBar.version = '^0\.2[345]\b' # version as of this writing is 0.23
-    ZBar.screenshot = ['gnome-screenshot', '-f']
+    ZBar.screenshot = ['scrot']
 
     def snapshot(filename)
       system(*ZBar.screenshot, filename)

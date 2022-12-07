@@ -17,5 +17,5 @@ end
 #`ssss-combine`
 #`zbarcam`
 #`zbarimg`
-#`gnome-screenshot`
+#`scrot`
 #`gpg`

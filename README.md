@@ -86,6 +86,8 @@ to_arg :arg0, 'Hello World' #=> "Hello World"
 # Groups items in Array by class.
 [1, 2.0, :Three, 'Four', /Five/, :Six, 'Seven'].classify
 #=> {Integer=>[1], Float=>[2.0], Symbol=>[:Three, :Six], String=>["Four", "Seven"], Regexp=>[/Five/]}
+[1, 2.0, :Three, "Four", /Five/, :Six, 'Seven'].classify{|v|(v.is_a?Numeric)? :Numeric : :NotNumeric}
+#=> {:Numeric=>[1, 2.0], :NotNumeric=>[:Three, "Four", /Five/, :Six, "Seven"]}
 ```
 ### SSSS.split
 ```ruby

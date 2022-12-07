@@ -64,6 +64,7 @@ mp
 mp
 nodisplay
 NONINFRINGEMENT
+NotNumeric
 org
 passphrase
 pid
@@ -81,6 +82,7 @@ Regexp
 reqs
 ret
 rubygems
+scrot
 sha
 sig
 SSS

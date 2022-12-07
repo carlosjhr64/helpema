@@ -37,6 +37,12 @@ class TestVersion < Test::Unit::TestCase
     assert_equal h, a.classify
   end
 
+  def test_array_classify_block
+    a = [1, 2.0, :three, 'Four', /Five/, /Six/, :seven, 8]
+    h = {Numeric: [1,2.0,8], NotNumeric: [:three,'Four',/Five/,/Six/,:seven]}
+    assert_equal h, a.classify{|v|(v.is_a? Numeric)? :Numeric : :NotNumeric}
+  end
+
   def test_run_command
     assert_equal '2020-12-31', run_command('date', {d: 'Dec 31, 2020', format0: '+%Y-%m-%d'}).chomp
   end

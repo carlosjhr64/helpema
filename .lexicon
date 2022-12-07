@@ -13,6 +13,7 @@ attr_accessor
 autoload
 batch
 blk
+block
 c
 call
 _cam
@@ -81,6 +82,7 @@ k
 key
 kill
 kw
+lambda
 last
 length
 level
