@@ -33,13 +33,13 @@ lib/helpema/youtubedl.rb
 lib/helpema/zbar.rb
   )
 
-  s.requirements << 'ruby: ruby 3.1.2p'
+  s.requirements << 'ruby: ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [aarch64-linux]'
   s.requirements << 'youtube-dl: 2021.06.06'
   s.requirements << 'ssss-split: 0.5'
   s.requirements << 'ssss-combine: 0.5'
-  s.requirements << 'zbarcam: 0.23'
-  s.requirements << 'zbarimg: 0.23'
-  s.requirements << 'gnome-screenshot: gnome-screenshot 40.0'
+  s.requirements << 'zbarcam: 0.23.90'
+  s.requirements << 'zbarimg: 0.23.90'
+  s.requirements << 'gnome-screenshot: gnome-screenshot 3.38.0'
   s.requirements << 'gpg: gpg (GnuPG) 2.2.27'
 
 end
