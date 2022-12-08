@@ -2,7 +2,7 @@ require 'json'
 
 module Helpema
   module YouTubeDL
-    extend Helpema
+    extend Rubish
     class << self; attr_accessor :version; end
     YouTubeDL.version = '^202\d\.[01]\d\.[0123]\d$'
 

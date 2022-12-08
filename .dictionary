@@ -41,7 +41,6 @@ Fortnite
 gemname
 gemname
 reqs
-geo
 getbyte
 github
 GnuPG
@@ -64,7 +63,6 @@ mp
 mp
 nodisplay
 NONINFRINGEMENT
-NotNumeric
 org
 passphrase
 pid
@@ -78,9 +76,10 @@ putc
 qrcodes
 rb
 rbs
-Regexp
 reqs
 ret
+rubish
+Rubish
 rubygems
 scrot
 sha

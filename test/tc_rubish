@@ -1,0 +1,34 @@
+#! ruby
+require 'test/unit'
+require 'helpema'
+
+module Testing
+  extend Helpema::Rubish
+  Testing.define_command(:this_date, cmd: 'date')
+  extend self
+end
+
+class TestVersion < Test::Unit::TestCase
+  def test_run_command
+    assert_equal '2020-12-31', Testing.run_command('date', {d: 'Dec 31, 2020', format0: '+%Y-%m-%d'}).chomp
+  end
+
+  def test_define_command
+    assert_equal '2020-12-31', Testing.this_date(d: 'Dec 31, 2020', format0: '+%Y-%m-%d').chomp
+  end
+
+  using Helpema::Rubish::Refinements
+  def test_to_args
+    h = {a: 'A', bb: 'BB', :c= => 'C', d0: 'D', ee: nil, f: false, gee: true, x: true}
+    assert_equal ['-a','A', '--bb', 'BB', '--c=C', 'D', '--gee', '-x'], h.to_args
+    assert_equal ['-a','A'], [:a,'A'].to_arg
+    assert_equal '--a=A', [:a=,'A'].to_arg
+    error = assert_raises(ArgumentError){ [:a,'A','B'].to_arg}
+    assert_match /wrong number of arguments/, error.message
+    error = assert_raises(NoMethodError){ ['--a','A'].to_arg}
+    assert_match /to_flag/, error.message
+    assert_equal '-a', :a.to_flag
+    assert_equal '--aa', :aa.to_flag
+    assert_equal nil, :aa0.to_flag
+  end
+end
