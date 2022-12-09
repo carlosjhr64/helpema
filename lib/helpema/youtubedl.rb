@@ -34,7 +34,9 @@ module Helpema
                arg3: nil },
       synonyms: {url: :arg3},
       err: '/dev/null')
-    def mp3(url, output:'%(id)s.%(ext)s') = YouTubeDL._mp3(url:url, output:output)
+
+    def mp3(url, output:'%(id)s.%(ext)s') =
+      YouTubeDL._mp3(url:url, output:output)
 
     extend self
   end
