@@ -4,17 +4,50 @@ require 'helpema'
 
 module Testing
   extend Helpema::Piper
-  Testing.define_command(:this_date, cmd: 'date')
+  Testing.define_command(:date)
+  Testing.define_command(:which, usage:{arg0:nil}, synonyms:{filename: :arg0})
+  Testing.define_command(:fish, mode:'w+')
+  Testing.define_command(:fish?, mode:'w', exception:false)
+  Testing.define_command(:ooops, cmd:'fish', mode:'w', default:'false', exception:'Ooops!')
   extend self
 end
 
 class TestPiper < Test::Unit::TestCase
+  include Helpema
+  KW = {script:nil,usage:nil,synonyms:nil,mode:nil,exception:nil,forward_pass:nil}
+
+  def test_run_command_plain
+    s = Piper.run_command('pwd').chomp
+    assert s.match?(/helpema$/)
+  end
+
   def test_run_command
-    assert_equal '2020-12-31', Helpema::Piper.run_command('date', {d: 'Dec 31, 2020', format0: '+%Y-%m-%d'}).chomp
+    assert_equal '2020-12-31', Piper.run_command('date', {d: 'Dec 31, 2020', format0: '+%Y-%m-%d'}).chomp
   end
 
   def test_define_command
-    assert_equal '2020-12-31', Testing.this_date(d: 'Dec 31, 2020', format0: '+%Y-%m-%d').chomp
+    assert_equal '2020-12-31', Testing.date(d: 'Dec 31, 2020', format0: '+%Y-%m-%d').chomp
+    assert_equal '/usr/bin/echo', Testing.which(filename: 'echo').chomp
+    assert_equal 'Hello', Testing.fish('echo "Hello"').chomp
+    assert_equal true, Testing.fish?('true')
+    assert_equal false, Testing.fish?('false')
+  end
+
+  def test_error_traps
+    e = assert_raises(RuntimeError){Testing.fish?}
+    assert_equal 'need script to write', e.message
+    e = assert_raises(RuntimeError){Testing.date 'wut'}
+    assert_equal 'cannot write script', e.message
+    e = assert_raises(RuntimeError){Testing.define_command('wut-wut')}
+    assert_equal 'bad name or cmd', e.message
+    e = assert_raises(RuntimeError){Testing.define_command(:wut, cmd:'wut?')}
+    assert_equal 'bad name or cmd', e.message
+    e = assert_raises(RuntimeError){Testing.define_command(:ruby, version:'ruby 1.')}
+    assert_equal '`ruby --version` !~ ruby 1.', e.message
+    e = assert_raises(RuntimeError){Testing.define_command(:shamsplit, cmd: 'ssss-split', v:'Version: 0.4')}
+    assert_equal '`ssss-split -v` !~ Version: 0.4', e.message
+    e = assert_raises(RuntimeError){Testing.ooops}
+    assert_equal 'Ooops!', e.message
   end
 
   using Helpema::Piper::Refinements

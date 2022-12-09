@@ -35,7 +35,7 @@ module Helpema
                        cmd:name.to_s.chomp('?').chomp('!'),
                        version:nil, v:nil,
                        usage:nil,   synonyms:nil,
-                       mode:'r',    exception:nil,
+                       mode:'r',    exception:nil, default:nil,
                        **popt,      &forward_pass)
       raise "bad name or cmd" unless name=~/^\w+[?!]?$/ and cmd=~/^[\w.\-]+$/
       # which version? --version or -v
@@ -45,7 +45,7 @@ module Helpema
       if v and not `#{cmd} -v`.strip.match?(v)
         raise "`#{cmd} -v` !~ #{v}"
       end
-      define_method(name) do |script=nil, **options, &blk|
+      define_method(name) do |script=default, **options, &blk|
         if mode[0]=='w'
           raise 'need script to write' unless script or blk or forward_pass
         else
