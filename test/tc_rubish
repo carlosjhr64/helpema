@@ -22,7 +22,8 @@ class TestRubish < Test::Unit::TestCase
       error = $!.message
     end
     assert_equal error, '`ruby --version` !~ ruby 1'
-    Helpema::Rubish.shell :ruby, version: 'ruby 3'
+    Helpema::Rubish.shell :ruby, version: 'ruby 3', default: 'puts RUBY_VERSION'
     assert_equal Helpema::Rubish.ruby('puts "Hello!"'), "Hello!\n"
+    assert_equal Helpema::Rubish.ruby, "3.1.2\n"
   end
 end
