@@ -1,6 +1,6 @@
 module Helpema
   module GPG
-    extend Rubish
+    extend Piper
     class << self; attr_accessor :version; end
     GPG.version = '^gpg \\(GnuPG\\) 2\.[234]\.' # version as of this writing is 2.2.27
 

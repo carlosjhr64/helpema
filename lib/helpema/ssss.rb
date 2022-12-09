@@ -1,6 +1,6 @@
 module Helpema
   module SSSS
-    extend Rubish
+    extend Piper
     class << self; attr_accessor :version; end
     SSSS.version = 'Version: 0\.[567]\b' # version as of this writing is 0.5
 

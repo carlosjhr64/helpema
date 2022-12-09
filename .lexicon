@@ -11,6 +11,7 @@ args
 Array
 attr_accessor
 autoload
+bash
 batch
 blk
 c
@@ -23,6 +24,7 @@ close_write
 cmd
 _combine
 combine
+command
 compact
 count
 cryptor
@@ -46,6 +48,7 @@ FFMPEG
 File
 filename
 first
+fish
 flatten
 format
 forward_pass
@@ -94,7 +97,6 @@ mp3
 n
 name
 new
-nil
 nodisplay
 now
 options
@@ -104,6 +106,7 @@ parse
 passphrase
 pid
 pipe
+Piper
 popen
 popt
 prescale
@@ -133,9 +136,11 @@ satisfied_by
 satisfies
 screen
 screenshot
+script
 secret
 secrets
 shares
+shell
 size
 snapshot
 _split
@@ -144,6 +149,7 @@ SSSS
 string
 String
 strip
+success
 Symbol
 symmetric
 synonyms
@@ -161,6 +167,7 @@ to_flag
 to_h
 token
 to_s
+to_sym
 transform_keys
 url
 usage

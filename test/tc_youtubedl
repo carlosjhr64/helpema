@@ -2,7 +2,7 @@
 require 'test/unit'
 require 'helpema'
 
-class TestHelpema < Test::Unit::TestCase
+class TestYoutubeDL < Test::Unit::TestCase
   def test_youtubedl
     assert_nothing_raised() do
       Helpema::YouTubeDL.json('caca') do |obj|

@@ -2,7 +2,7 @@
 require 'test/unit'
 require 'helpema'
 
-class TestHelpema < Test::Unit::TestCase
+class TestZBar < Test::Unit::TestCase
   def test_zbar
     assert_nothing_raised() do
       # Just check that it runs, needs "live" testing.

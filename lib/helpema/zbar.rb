@@ -2,7 +2,7 @@ require 'tmpdir'
 
 module Helpema
   module ZBar
-    extend Rubish
+    extend Piper
     class << self; attr_accessor :version, :screenshot; end
     ZBar.version = '^0\.2[345]\b' # version as of this writing is 0.23
     ZBar.screenshot = ['scrot']

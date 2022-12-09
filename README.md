@@ -1,6 +1,6 @@
 # Helpema
 
-* [VERSION 4.0.221208](https://github.com/carlosjhr64/helpema/releases)
+* [VERSION 4.0.221209](https://github.com/carlosjhr64/helpema/releases)
 * [github](https://github.com/carlosjhr64/helpema)
 * [rubygems](https://rubygems.org/gems/helpema)
 
@@ -42,7 +42,7 @@ just say like `requires "ruby ~>3.2"`
 ### run_command ###
 # Automates pipe creation to a system command.
 # See the code for all available features.
-Helpema::Rubish.run_command('date',{d: 'Dec 31, 2020',I: true}) #=> "2020-12-31\n"
+Helpema::Piper.run_command('date',{d: 'Dec 31, 2020',I: true}) #=> "2020-12-31\n"
 ```
 ### define_command
 ```ruby
@@ -50,7 +50,7 @@ Helpema::Rubish.run_command('date',{d: 'Dec 31, 2020',I: true}) #=> "2020-12-31\
 # Creates a method out of a system command.
 # See the code for all available features.
 module System
-  extend Helpema::Rubish
+  extend Helpema::Piper
   define_command(:date, cmd: 'date', usage: {d: nil, I: true}, synonyms: {string: :d})
   extend self
 end

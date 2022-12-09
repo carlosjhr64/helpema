@@ -2,33 +2,27 @@
 require 'test/unit'
 require 'helpema'
 
-module Testing
-  extend Helpema::Rubish
-  Testing.define_command(:this_date, cmd: 'date')
-  extend self
-end
-
-class TestVersion < Test::Unit::TestCase
-  def test_run_command
-    assert_equal '2020-12-31', Testing.run_command('date', {d: 'Dec 31, 2020', format0: '+%Y-%m-%d'}).chomp
+class TestRubish < Test::Unit::TestCase
+  def test_fish
+    assert_equal Helpema::Rubish.fish('echo "Hello!"'), "Hello!\n"
   end
-
-  def test_define_command
-    assert_equal '2020-12-31', Testing.this_date(d: 'Dec 31, 2020', format0: '+%Y-%m-%d').chomp
+  def test_fish_bool
+    assert_equal Helpema::Rubish.fish?('true'), true
+    assert_equal Helpema::Rubish.fish?('false'), false
   end
-
-  using Helpema::Rubish::Refinements
-  def test_to_args
-    h = {a: 'A', bb: 'BB', :c= => 'C', d0: 'D', ee: nil, f: false, gee: true, x: true}
-    assert_equal ['-a','A', '--bb', 'BB', '--c=C', 'D', '--gee', '-x'], h.to_args
-    assert_equal ['-a','A'], [:a,'A'].to_arg
-    assert_equal '--a=A', [:a=,'A'].to_arg
-    error = assert_raises(ArgumentError){ [:a,'A','B'].to_arg}
-    assert_match /wrong number of arguments/, error.message
-    error = assert_raises(NoMethodError){ ['--a','A'].to_arg}
-    assert_match /to_flag/, error.message
-    assert_equal '-a', :a.to_flag
-    assert_equal '--aa', :aa.to_flag
-    assert_equal nil, :aa0.to_flag
+  def test_command
+    Helpema::Rubish.command :date
+    assert_equal Helpema::Rubish.date(d: 'Dec 31, 2020',I: true), "2020-12-31\n"
+  end
+  def test_shell
+    error = nil
+    begin
+      Helpema::Rubish.shell :ruby, version: 'ruby 1'
+    rescue
+      error = $!.message
+    end
+    assert_equal error, '`ruby --version` !~ ruby 1'
+    Helpema::Rubish.shell :ruby, version: 'ruby 3'
+    assert_equal Helpema::Rubish.ruby('puts "Hello!"'), "Hello!\n"
   end
 end

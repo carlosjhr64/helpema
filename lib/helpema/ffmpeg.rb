@@ -1,6 +1,6 @@
 module Helpema
   module FFMPEG
-    extend Rubish
+    extend Piper
 
     FFMPEG.define_command(:_hash,
       cmd: 'ffmpeg',

@@ -1,6 +1,7 @@
 module Helpema
-  VERSION = '4.0.221208'
+  VERSION = '4.0.221209'
 
+  autoload :Piper,     'helpema/piper.rb'
   autoload :Rubish,    'helpema/rubish.rb'
   autoload :SSSS,      'helpema/ssss.rb'
   autoload :YouTubeDL, 'helpema/youtubedl.rb'
