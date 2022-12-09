@@ -4,6 +4,10 @@ module Helpema
     class << self; attr_accessor :version; end
     SSSS.version = 'Version: 0\.[567]\b' # version as of this writing is 0.5
 
+    # To enforce a method signature, I wrap a `public` method around a
+    # `_private` `define_command` method.  A `define_command` method looks like
+    # `_private(script=default,**options,&blk)`
+
     SSSS.define_command(:_split,
       cmd: 'ssss-split', v: SSSS.version,
       usage: {Q:true,t:2,n:3,w:nil,s:nil,x:false},

@@ -2,7 +2,8 @@ module Helpema
   module GPG
     extend Piper
     class << self; attr_accessor :version; end
-    GPG.version = '^gpg \\(GnuPG\\) 2\.[234]\.' # version as of this writing is 2.2.27
+    # version as of this writing is 2.2.27
+    GPG.version = '^gpg \\(GnuPG\\) 2\.[234]\.'
 
     GPG.define_command(:cryptor,
       cmd: 'gpg', version: GPG.version,
