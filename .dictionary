@@ -61,8 +61,10 @@ md
 mktmpdir
 mp
 mp
+msg
 nodisplay
 NONINFRINGEMENT
+Ooops
 org
 passphrase
 pid
@@ -81,6 +83,7 @@ ret
 rubish
 Rubish
 rubygems
+RuntimeError
 scrot
 sha
 sig
@@ -100,6 +103,8 @@ txt
 oK
 ZSccZI
 url
+usr
+wut
 www
 youtube
 youtubedl

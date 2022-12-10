@@ -31,9 +31,9 @@ module Helpema
       end
     end
 
-    def validate_command(cmd, version, flag='--version')
+    def Piper.validate_command(cmd, version, flag='--version')
       raise "`#{cmd} #{flag}` !~ #{version}" unless
-      `#{cmd} --version`.strip.match?(version)
+      `#{cmd} #{flag}`.strip.match?(version)
     end
 
     # Note: popt is IO.popen's options(think of it as "pipe's options").
@@ -44,8 +44,8 @@ module Helpema
                        mode:'r',    exception:nil, default:nil,
                        **popt,      &forward_pass)
       raise "bad name or cmd" unless name=~/^\w+[?!]?$/ and cmd=~/^[\w.\-]+$/
-      validate_command(cmd, version) if version
-      validate_command(cmd, v, '-v') if v
+      Piper.validate_command(cmd, version) if version
+      Piper.validate_command(cmd, v, '-v') if v
       define_method(name) do |script=default, **options, &blk|
         if mode[0]=='w'
           raise 'need script to write' unless script or blk or forward_pass

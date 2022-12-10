@@ -18,7 +18,7 @@ $ gem install helpema
 
 ## SYNOPSIS:
 
-### requires
+### Helpema.requires
 ```ruby
 require 'helpema'
 
@@ -34,21 +34,47 @@ base_convert  ~>6.0
 entropia      ~>1.0'
 #=> ["base_convert", "entropia"]
 ```
-You can also by `using Helpema::Refinements`
-just say like `requires "ruby ~>3.2"`
-
-### run_command
+### Helpema::Refinements
 ```ruby
-### run_command ###
-# Automates pipe creation to a system command.
-# See the code for all available features.
-Helpema::Piper.run_command('date',{d: 'Dec 31, 2020',I: true}) #=> "2020-12-31\n"
+using Helpema::Refinements
+RUBY_VERSION.satisfies?('~>3.1')  #=> true
+'2.7.5'.satisfies?('~>3.1')       #=> false
+begin
+  requires 'ruby ~>9000'
+rescue
+  msg = $!.message
+end
+msg #=> "ruby 3.1.2 not ~>9000"
 ```
-### define_command
+### Helpema::Piper
+```ruby
+include Helpema
+# These will raise RuntimeError unless version matches:
+Piper.validate_command('ruby', '^ruby 3.1.2p20', '--version')
+Piper.validate_command('ssss-split', 'Version: 0\.[567]$', '-v')
+# Piper.run_command(cmd, options={}, script:nil, usage=nil, synonyms:nil,
+#                   mode:'r', exception:nil, forward_pass:nil **popt, &blk)
+# Too many features to fully cover in a synopsis...
+Piper.run_command('date',{d: 'Dec 31, 2020',I: true}) #=> "2020-12-31\n"
+Piper.run_command('bash',script:'echo "Hello"',mode:'w+') #=> "Hello\n"
+Piper.run_command('fish',script:'false',mode:'w',exception:false) #=> false
+begin
+  Piper.run_command('fish',script:'false',mode:'w',exception:'Ooops!')
+rescue
+  msg = $!.message
+end
+msg #=> "Ooops!"
+```
+### Helpema::Piper::Refinements
+```ruby
+using Piper::Refinements
+{d: 'Dec 31, 2020',I: true}.to_args        #=> ["-d", "Dec 31, 2020", "-I"]
+{'date=': '2022-12-10', wut: true}.to_args #=> ["--date=2022-12-10", "--wut"]
+```
+### extend Helpema::Piper
 ```ruby
 ### define_command ###
-# Creates a method out of a system command.
-# See the code for all available features.
+# Create a method out of a system command.
 module System
   extend Helpema::Piper
   define_command(:date, cmd: 'date', usage: {d: nil, I: true}, synonyms: {string: :d})
@@ -56,10 +82,25 @@ module System
 end
 System.date(string: 'Dec 31, 2020') #=> "2020-12-31\n"
 ```
-### SSSS.split
+### Helpema::Rubish
+```ruby
+# Predefined Rubish:
+Rubish.bash 'echo "Hello!"' #=> "Hello!\n"
+Rubish.bash? 'which ruby' #=> true
+Rubish.fish? 'false'      #=> false
+# Define you own Rubish shell call:
+Rubish.shell('ruby', default:'puts RUBY_VERSION')
+Rubish.ruby #=> "3.1.2\n"
+Rubish.ruby('puts "Hello!"') #=> "Hello!\n"
+# And define you own Rubish command call:
+Rubish.command('which', usage:{arg0:nil})
+def which(cmd) = Rubish.which(arg0:cmd)
+which 'echo' # "/usr/bin/echo\n"
+```
+### Helpema::SSSS.split
 ```ruby
 ### SSSS.split ####
-Helpema::SSSS.split(secret: "Top Secret!", threshold: 2, shares: 3)
+SSSS.split(secret: "Top Secret!", threshold: 2, shares: 3)
 #~> ^\["1-\h+", "2-\h+", "3-\h+"\]$
 # Note that the split has random outputs on the same inputs.
 ```
@@ -67,7 +108,7 @@ Helpema::SSSS.split(secret: "Top Secret!", threshold: 2, shares: 3)
 ```ruby
 #### SSSS.combine ###
 # Pregenerated splits combine to reproduce the secret.
-Helpema::SSSS.combine(secrets: ["3-055562917c41e68c6ab2c8", "1-27bf3cbfe8d2c25c7e8928"],
+SSSS.combine(secrets: ["3-055562917c41e68c6ab2c8", "1-27bf3cbfe8d2c25c7e8928"],
              threshold: 2)
 #=> "Top Secret!"
 ```
@@ -126,14 +167,9 @@ eio.rewind
 Helpema::GPG.decrypt(passphrase: '<Secret>', ioin: eio, ioout: dio)
 dio.string #=> "<Plain>"
 ```
-
 ## TROUBLESHOOTING:
 
-Command version mismatch
-: set `Helpema::WRAPPER.version = "your.version"` or just nil it.
-
-More documentation
-: see [sig/helpema.rb](sig/helpema.rbs) for the expected method signatures.
++ Command version mismatch: set `Helpema::WRAPPER.version = "your.version"` or just nil it.
 
 ## LICENSE:
 

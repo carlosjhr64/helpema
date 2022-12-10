@@ -50,6 +50,16 @@ class TestPiper < Test::Unit::TestCase
     assert_equal 'Ooops!', e.message
   end
 
+  def test_validate_command
+    Piper.validate_command('ssss-split', 'Version: 0\.[567]\b', '-v')
+    Piper.validate_command('youtube-dl', '^202\d\.[01]\d\.[0123]\d$', '--version')
+    Piper.validate_command('zbarcam', '^0\.2[345]\b', '--version')
+    Piper.validate_command('gpg', '^gpg \\(GnuPG\\) 2\.[234]\.', '--version')
+    Piper.validate_command('ffmpeg', '^ffmpeg version 4\.[345]\.', '-version')
+    e = assert_raises(RuntimeError){Piper.validate_command('ruby', 'ruby 9000', '--version')}
+    assert_equal '`ruby --version` !~ ruby 9000', e.message
+  end
+
   using Helpema::Piper::Refinements
   def test_to_args
     h = {a: 'A', bb: 'BB', :c= => 'C', d0: 'D', ee: nil, f: false, gee: true, x: true}
