@@ -26,4 +26,12 @@ class TestRubish < Test::Unit::TestCase
     assert_equal Helpema::Rubish.ruby('puts "Hello!"'), "Hello!\n"
     assert_equal Helpema::Rubish.ruby, "3.1.2\n"
   end
+
+  include Helpema
+  def test_exception
+    Rubish.shell(:fish!, exception: 'Bang!')
+    assert_equal "OK\n", Rubish.fish!('echo "OK"')
+    error = assert_raises(RuntimeError){Rubish.fish!('false')}
+    assert_equal 'Bang!', error.message
+  end
 end

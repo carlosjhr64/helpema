@@ -3,10 +3,15 @@ module Helpema
     extend Piper
     def Rubish.shell(name,
                      cmd:name.to_s.chomp('?').chomp('!'),
-                     version:nil, v:nil,
-                     usage:nil,   synonyms:nil,
-                     default:nil)
-      mode,exception = (name[-1]=='?')? ['w',false] : ['w+',nil]
+                     version:nil,    v:nil,
+                     usage:nil,      synonyms:nil,
+                     exception:nil,  default:nil)
+      if name[-1]=='?'
+        mode = 'w'
+        exception = false unless exception
+      else
+        mode = 'w+'
+      end
       Rubish.define_command(name.to_sym,
                             cmd:cmd,
                             version:version, v:v,
@@ -21,9 +26,9 @@ module Helpema
     def Rubish.command(name,
                       cmd:name.to_s.chomp('?').chomp('!'),
                       version:nil, v:nil,
-                      usage:nil,   synonyms:nil)
+                      usage:nil,   synonyms:nil, exception:nil)
       mode = 'r'
-      exception = (name[-1]=='?')? false : nil
+      exception = false if name[-1]=='?' and not exception
       Rubish.define_command(name.to_sym,
                             cmd:cmd,
                             version:version, v:v,
