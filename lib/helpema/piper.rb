@@ -31,6 +31,12 @@ module Helpema
       end
     end
 
+    def validate_command(cmd, version, flag='--version')
+      raise "`#{cmd} #{flag}` !~ #{version}" unless
+      `#{cmd} --version`.strip.match?(version)
+    end
+
+    # Note: popt is IO.popen's options(think of it as "pipe's options").
     def define_command(name,
                        cmd:name.to_s.chomp('?').chomp('!'),
                        version:nil, v:nil,
@@ -38,13 +44,8 @@ module Helpema
                        mode:'r',    exception:nil, default:nil,
                        **popt,      &forward_pass)
       raise "bad name or cmd" unless name=~/^\w+[?!]?$/ and cmd=~/^[\w.\-]+$/
-      # which version? --version or -v
-      if version and not `#{cmd} --version`.strip.match?(version)
-        raise "`#{cmd} --version` !~ #{version}"
-      end
-      if v and not `#{cmd} -v`.strip.match?(v)
-        raise "`#{cmd} -v` !~ #{v}"
-      end
+      validate_command(cmd, version) if version
+      validate_command(cmd, v, '-v') if v
       define_method(name) do |script=default, **options, &blk|
         if mode[0]=='w'
           raise 'need script to write' unless script or blk or forward_pass
@@ -92,6 +93,8 @@ module Helpema
           ret = pipe.read
         end
       end
+      # False exception instead of nil or "an error message"
+      # flags the expected behavior as defined:
       success = ($?.exitstatus==0)
       raise(exception) if exception and not success
       return success if exception==false

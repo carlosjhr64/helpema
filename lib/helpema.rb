@@ -1,5 +1,5 @@
 module Helpema
-  VERSION = '4.0.221209'
+  VERSION = '4.0.221210'
 
   autoload :Piper,     'helpema/piper.rb'
   autoload :Rubish,    'helpema/rubish.rb'
