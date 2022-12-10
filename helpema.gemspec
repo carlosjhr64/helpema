@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = <<DESCRIPTION
 Meant to be an eclectic collection of useful single functions and wrappers.
 
-Featured method: `requires "good ~>3.0", "bad ~>2.7", "ugly ~>1.8"`
+Featured function: `Helpema.requires "good ~>3.0", "bad ~>2.7", "ugly ~>1.8"`
 DESCRIPTION
 
   s.summary = <<SUMMARY
@@ -27,7 +27,8 @@ README.md
 lib/helpema.rb
 lib/helpema/ffmpeg.rb
 lib/helpema/gpg.rb
-lib/helpema/helpema.rb
+lib/helpema/piper.rb
+lib/helpema/rubish.rb
 lib/helpema/ssss.rb
 lib/helpema/youtubedl.rb
 lib/helpema/zbar.rb
