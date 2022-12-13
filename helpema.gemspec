@@ -12,13 +12,13 @@ Gem::Specification.new do |s|
   s.licenses = ['MIT']
 
   s.description = <<DESCRIPTION
-Meant to be an eclectic collection of useful single functions and wrappers.
-
-Featured function: `Helpema.requires "good ~>3.0", "bad ~>2.7", "ugly ~>1.8"`
+Meant to be an eclectic collection of useful Linux command wrappers.
+Facilitates creation of custom wrappers for any Linux command.
 DESCRIPTION
 
   s.summary = <<SUMMARY
-Meant to be an eclectic collection of useful single functions and wrappers.
+Meant to be an eclectic collection of useful Linux command wrappers.
+Facilitates creation of custom wrappers for any Linux command.
 SUMMARY
 
   s.require_paths = ['lib']
@@ -35,7 +35,7 @@ lib/helpema/zbar.rb
   )
 
   s.requirements << 'ruby: ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [aarch64-linux]'
-  s.requirements << 'youtube-dl: 2021.06.06'
+  s.requirements << 'youtube-dl: 2021.12.17'
   s.requirements << 'ssss-split: 0.5'
   s.requirements << 'ssss-combine: 0.5'
   s.requirements << 'zbarcam: 0.23.90'
