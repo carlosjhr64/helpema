@@ -1,14 +1,13 @@
 # Helpema
 
-* [VERSION 4.0.221210](https://github.com/carlosjhr64/helpema/releases)
+* [VERSION 5.0.221213](https://github.com/carlosjhr64/helpema/releases)
 * [github](https://github.com/carlosjhr64/helpema)
 * [rubygems](https://rubygems.org/gems/helpema)
 
 ## DESCRIPTION:
 
-Meant to be an eclectic collection of useful single functions and wrappers.
-
-Featured function: `Helpema.requires "good ~>3.0", "bad ~>2.7", "ugly ~>1.8"`
+Meant to be an eclectic collection of useful Linux command wrappers.
+Facilitates creation of custom wrappers for any Linux command.
 
 ## INSTALL:
 
@@ -18,37 +17,13 @@ $ gem install helpema
 
 ## SYNOPSIS:
 
-### Helpema.requires
+Note that `Helpema` auto-loads assets as requested.
 ```ruby
 require 'helpema'
-
-### requires ###
-# Ensure ruby's and helpema's version.
-# Returns the list of loaded gems.
-# For those quick little scripts one writes in one's bin
-# that annoyingly keep falling out of maintainance... right?
-Helpema.requires'
-ruby          ~>3.0
-helpema       ~>4.0
-base_convert  ~>6.0
-entropia      ~>1.0'
-#=> ["base_convert", "entropia"]
-```
-### Helpema::Refinements
-```ruby
-using Helpema::Refinements
-RUBY_VERSION.satisfies?('~>3.1')  #=> true
-'2.7.5'.satisfies?('~>3.1')       #=> false
-begin
-  requires 'ruby ~>9000'
-rescue
-  msg = $!.message
-end
-msg #=> "ruby 3.1.2 not ~>9000"
+include Helpema
 ```
 ### Helpema::Piper
 ```ruby
-include Helpema
 # These will raise RuntimeError unless version matches:
 Piper.validate_command('ruby', '^ruby 3.1.2p20', '--version')
 Piper.validate_command('ssss-split', 'Version: 0\.[567]$', '-v')

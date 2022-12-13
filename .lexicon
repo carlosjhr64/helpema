@@ -53,11 +53,6 @@ flag
 flatten
 format
 forward_pass
-gem
-Gem
-gemname
-gemname_reqs
-gems
 getbyte
 gets
 GPG
@@ -79,7 +74,6 @@ _json
 json
 JSON
 k
-Kernel
 key
 kill
 kw
@@ -87,8 +81,6 @@ last
 length
 level
 lines
-list
-loaded
 map
 match
 mktmpdir
@@ -112,7 +104,6 @@ popen
 popt
 prescale
 Process
-push
 putc
 puts
 q
@@ -123,18 +114,12 @@ raw
 read
 refine
 Refinements
-reqs
 require
-Requirement
-requires
 ret
 Rubish
 Ruby31
-RUBY_VERSION
 run_command
 s
-satisfied_by
-satisfies
 screen
 screenshot
 script
@@ -148,7 +133,6 @@ _split
 split
 SSSS
 string
-String
 strip
 success
 Symbol
@@ -177,7 +161,6 @@ v
 validate_command
 value
 version
-Version
 VERSION
 w
 write

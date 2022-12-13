@@ -31,16 +31,12 @@ dl
 eio
 elsif
 enc
-entropia
 exitstatus
 ext
 fd
 ffmpeg
 FFMPEG
 Fortnite
-gemname
-gemname
-reqs
 getbyte
 github
 GnuPG
@@ -56,7 +52,6 @@ ioout
 json
 json
 kw
-maintainance
 md
 mktmpdir
 mp
@@ -77,7 +72,6 @@ prescale
 putc
 qrcodes
 rb
-reqs
 ret
 rubish
 Rubish
