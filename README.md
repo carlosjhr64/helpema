@@ -25,7 +25,7 @@ include Helpema
 ### Helpema::Piper
 ```ruby
 # These will raise RuntimeError unless version matches:
-Piper.validate_command('ruby', '^ruby 3.1.2p20', '--version')
+Piper.validate_command('ruby', '^ruby 3.2.0', '--version')
 Piper.validate_command('ssss-split', 'Version: 0\.[567]$', '-v')
 # Piper.run_command(cmd, options={}, script:nil, usage=nil, synonyms:nil,
 #                   mode:'r', exception:nil, forward_pass:nil **popt, &blk)
@@ -65,7 +65,7 @@ Rubish.bash? 'which ruby' #=> true
 Rubish.fish? 'false'      #=> false
 # Define you own Rubish shell call:
 Rubish.shell('ruby', default:'puts RUBY_VERSION')
-Rubish.ruby #=> "3.1.2\n"
+Rubish.ruby #=> "3.2.0\n"
 Rubish.ruby('puts "Hello!"') #=> "Hello!\n"
 # And define you own Rubish command call:
 Rubish.command('which', usage:{arg0:nil})
@@ -150,7 +150,7 @@ dio.string #=> "<Plain>"
 
 (The MIT License)
 
-Copyright (c) 2022 CarlosJHR64
+Copyright (c) 2023 CarlosJHR64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
